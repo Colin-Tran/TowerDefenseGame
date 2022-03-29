@@ -18,7 +18,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public int finalScore = 0;
 	
 	//CREATE THE OBJECT (STEP 1)
-	Background 	bg 	= new Background(0, 0);
+	Background 	bg 	= new Background(50, 50);
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -62,8 +62,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
-		JFrame f = new JFrame("Beat the Asteroids!");
-		f.setSize(new Dimension(500, 735));
+		JFrame f = new JFrame("Plants vs Zombies");
+		f.setSize(new Dimension(1000, 500));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.setResizable(false);
