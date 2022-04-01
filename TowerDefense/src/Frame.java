@@ -18,8 +18,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public int finalScore = 0;
 	
 	//CREATE THE OBJECT (STEP 1)
-	Background 	bg 	= new Background(50, 50);
-	
+	Background 	bg 	= new Background(0, 0);
+	SlimeEnemy slime = new SlimeEnemy(50,50);
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//g.drawRect(mainChar.x, mainChar.y, mainChar.getWidth(), mainChar.getHeight());
@@ -33,7 +33,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//paint objects
 		bg.paint(g);
-	
+		slime.paint(g);
 		
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
 
@@ -63,7 +63,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	public Frame() {
 		JFrame f = new JFrame("Plants vs Zombies");
-		f.setSize(new Dimension(1000, 500));
+		f.setSize(new Dimension(1300, 500));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.setResizable(false);
