@@ -31,7 +31,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//p5 collision import link if needed = https://github.com/bmoren/p5.collide2D
 		
 		
-	
+	//10X5 BACKGROUND SQUARES
 		//paint objects
 		bg.paint(g);
 	//	slime.paint(g);
@@ -49,13 +49,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		Font stringFont = new Font( "SansSerif", Font.BOLD, 40 );
 		g.setFont(stringFont);
 		
-	
-	
-		
-	
-		
-		
-	
+		for(int i = 0; i < slimes.length; i++) {
+		if(slimes[i].getX() <= 100) {
+			slimes[i].moveRight();
+		}else if (slimes[i].getX() <= 200 && slimes[i].getX() >= 101) {
+			slimes[i].moveUp();
+		}else if(slimes[i].getY() < 200 && slimes[i].getX() >= 101 ) {
+			slimes[i].moveRight();
+		}
+		}
 		}
 		
 	
@@ -83,6 +85,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 	
 	}
+	
+	
+	
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

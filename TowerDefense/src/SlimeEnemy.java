@@ -11,7 +11,8 @@ public class SlimeEnemy {
 	private int height;
 	private int health;
 	private String fileName; 
-
+	private int sx;//slime x movement
+	private int sy;//slime y movement
 	
 	//for movement
 
@@ -37,6 +38,8 @@ public class SlimeEnemy {
 		width = 90;
 		height = 80;
 		health = 100;
+		sx = 0;
+		sy = 0;
 	}
 	
 	
@@ -61,7 +64,8 @@ public class SlimeEnemy {
 	private void update() {
 		tx.setToTranslation(x, y);
 		tx.scale(0.8,0.8);
-		
+		x += sx;
+		y += sy;
 		
 	}
 	
@@ -80,10 +84,37 @@ public class SlimeEnemy {
 		}
 		return tempImage;
 	}
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
 	
 	public void removeHealth() {
 		health-= 10;
 	}
+	
+	public void moveRight () {
+		sx = 2;
+		sy = 0;
+	}
+	public void moveLeft() {
+		sx = -2;
+		sy = 0;
+	}
+	
+	public void moveUp() {
+		sx = 0;
+		sy = -2;
+	}
+	
+	public void moveDown() {
+		sx = 0;
+		sy = 2;
+	}
+	
 }
 	
 
