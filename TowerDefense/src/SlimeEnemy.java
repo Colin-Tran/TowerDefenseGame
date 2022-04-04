@@ -9,6 +9,7 @@ import java.util.Random;
 public class SlimeEnemy {
 	private int width;
 	private int height;
+	private int health;
 	private String fileName; 
 
 	
@@ -23,7 +24,7 @@ public class SlimeEnemy {
 	public int x, y;
 	
 	public SlimeEnemy(int newX, int newY) {
-		img = getImage("/imgs/slimeJumping.gif"); //load the image for Tree
+		img = getImage("/imgs/recoloredSlime.gif"); //load the image for Tree
 	
 		//initialize the location of the image
 		x = newX;
@@ -35,7 +36,7 @@ public class SlimeEnemy {
 		//use your variables
 		width = 90;
 		height = 80;
-		
+		health = 100;
 	}
 	
 	
@@ -59,7 +60,7 @@ public class SlimeEnemy {
 	/* update the picture variable location */
 	private void update() {
 		tx.setToTranslation(x, y);
-		tx.scale(0.25, 0.25);
+		tx.scale(0.8,0.8);
 		
 		
 	}
@@ -78,6 +79,10 @@ public class SlimeEnemy {
 			e.printStackTrace();
 		}
 		return tempImage;
+	}
+	
+	public void removeHealth() {
+		health-= 10;
 	}
 }
 	

@@ -19,7 +19,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
-	SlimeEnemy slime = new SlimeEnemy(100,50);
+//	SlimeEnemy slime = new SlimeEnemy(100,250);
+	SlimeEnemy[] slimes = new SlimeEnemy[50];
+	
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//g.drawRect(mainChar.x, mainChar.y, mainChar.getWidth(), mainChar.getHeight());
@@ -28,26 +31,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//p5 collision import link if needed = https://github.com/bmoren/p5.collide2D
 		
 		
-		//setting correct Heights and Widths for the different hit box sizes for the asteroids and spaceships
-		//Adjusted according to hit box shown on screen
-		
+	
 		//paint objects
 		bg.paint(g);
-		slime.paint(g);
-		
+	//	slime.paint(g);
+		for(int i = 0; i < slimes.length-1; i++) {
+			slimes[i].paint(g);
+		}
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
 
-		//g.setColor(color); 
 		
-		//Draws Hit Boxes for All Objects
-		
+
 		
 		g.setColor(color);
-		//Writes End Game Message and Score
+
+		
 		Font stringFont = new Font( "SansSerif", Font.BOLD, 40 );
 		g.setFont(stringFont);
 		
-		//Checks Score
+	
 	
 		
 	
@@ -62,6 +64,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
+		for(int i = 0; i < slimes.length; i++) {
+			slimes[i] = new SlimeEnemy(0, 330);
+		}
+		
 		JFrame f = new JFrame("Plants vs Zombies");
 		f.setSize(new Dimension(1300, 500));
 		f.setBackground(Color.blue);
@@ -75,7 +81,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		
-		
+	
 	}
 	
 	@Override
@@ -86,20 +92,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
-		//originally planned for rotation, but now removed feature
-		
-		/*if (mainChar.x < 250 && mainChar.x > 0) {
-			System.out.println("left");
-			mainChar.rotate();
-			shipHitbox.rotate();
-		}
-		if (mainChar.x > 250 && mainChar.x < 500) {
-			System.out.println("right");
-			mainChar.leftRotate();
-			shipHitbox.leftRotate();
-			*/
-		//}
 		
 	}
 
@@ -129,7 +121,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		//CONTROLS SHIP MOVEMENT
+
 			System.out.println(arg0.getKeyCode());
 			
 	}
@@ -138,7 +130,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		//STOPS MOVEMENT AS SOON AS KEYS ARE RELEASED (smoother movement)
+		
 		
 		
 		
