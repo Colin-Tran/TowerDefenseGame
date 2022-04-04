@@ -19,7 +19,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
-	SlimeEnemy slime = new SlimeEnemy(50,50);
+	SlimeEnemy slime = new SlimeEnemy(100,50);
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		//g.drawRect(mainChar.x, mainChar.y, mainChar.getWidth(), mainChar.getHeight());
