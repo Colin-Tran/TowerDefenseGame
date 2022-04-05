@@ -21,7 +21,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Background 	bg 	= new Background(0, 0);
 //	SlimeEnemy slime = new SlimeEnemy(100,250);
 	SlimeEnemy[] slimes = new SlimeEnemy[50];
-	
+	Tower[] towers = {new PelletTower(730, 220, 75, 75), 
+			new PelletTower(230, 320, 75, 75)};
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -58,7 +59,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			slimes[i].moveRight();
 		}
 		}
+		
+		for (Tower tower: towers) {
+			tower.paint(g);
 		}
+	}
 		
 	
 	public static void main(String[] arg) {
