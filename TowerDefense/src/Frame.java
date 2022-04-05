@@ -55,9 +55,20 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			slimes[i].moveRight();
 		}else if (slimes[i].getX() <= 200 && slimes[i].getX() >= 101) {
 			slimes[i].moveUp();
-		}else if(slimes[i].getY() < 200 && slimes[i].getX() >= 101 ) {
+		}
+		if(slimes[i].getY() < 140 && slimes[i].getY() > 110) {
 			slimes[i].moveRight();
 		}
+		if(slimes[i].getX() < 500 && slimes[i].getX() > 400) {
+			slimes[i].moveDown();
+		}
+		if(slimes[i].getX() < 500 && slimes[i].getX() > 400 && slimes[i].getY() >410) {
+			slimes[i].moveRight();
+		}
+		
+		
+		
+		
 		}
 		
 		for (Tower tower: towers) {
