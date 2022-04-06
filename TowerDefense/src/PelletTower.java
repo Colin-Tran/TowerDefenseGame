@@ -14,7 +14,7 @@ public class PelletTower extends Tower {
 	public PelletTower(
 			int x, int y, int width, int height) {
 		
-		super ("Pellet Tower", 10, 2, 2, 1,
+		super ("Pellet Tower", 10, 2, 1, 1,
 		x,y,width, height, "/imgs/pellettower.png");
 	}
 
