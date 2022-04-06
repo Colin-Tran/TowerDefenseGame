@@ -14,7 +14,7 @@ public class Background{
 	private AffineTransform tx;
 
 	public Background(int x, int y) {
-		img = getImage("/Background1PVZ.webp"); //load the image for Tree
+		img = getImage("/imgs/backgroundTowerDefens.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 									//use your variables
@@ -43,10 +43,10 @@ public class Background{
 		
 		
 	}
-	
+	//original pixel size = 400x245
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(1, 1);
+		tx.scale(2, 2);
 	}
 
 	private Image getImage(String path) {
