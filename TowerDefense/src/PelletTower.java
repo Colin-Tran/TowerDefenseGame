@@ -23,13 +23,13 @@ public class PelletTower extends Tower {
 		//draw the circle for the range
 		g.setColor(Color.GRAY);
 		Point center = super.getCenter();
-		g.drawOval((int)(center.getX()-range*width), 
-				(int)(center.getY()-range*height), 
-				(range+2)*width, (range+2)*height);
+		g.drawOval(x-range*width, 
+				y-range*height, 
+				width*(2*range+1), height*(2*range+1));
 		g.setColor(new Color(64,64,64,64));
-		g.fillOval((int)(center.getX()-range*width), 
-				(int)(center.getY()-range*height), 
-				(range+2)*width, (range+2)*height);
+		g.fillOval(x-range*width, 
+				y-range*height, 
+				width*(2*range+1), height*(2*range+1));
 		
 		super.paint(g); //adds the image
 	
