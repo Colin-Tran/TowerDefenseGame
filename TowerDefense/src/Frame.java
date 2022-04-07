@@ -51,27 +51,62 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g.setFont(stringFont);
 		
 		//movement
-		for(int i = 0; i < slimes.length; i++) {
-			if(slimes[i].getX() <= 100) {
+		for(int i = 0; i < slimes.length; i++) { 
+			if(slimes[i].getX() <= 100 && slimes[i].getY() < 500) { //move right at beginning
 				slimes[i].moveRight();
-			}else if (slimes[i].getX() <= 200 && slimes[i].getX() >= 101) {
+			}
+			
+			//when passes first tile move up pathway
+			if (slimes[i].getX() < 200 && slimes[i].getX() > 105 && slimes[i].getY() <500) { 
 				slimes[i].moveUp();
 			}
-			if(slimes[i].getY() < 140 && slimes[i].getY() > 110) {
+			
+			//MOVE RIGHT PATHWAY
+			if(slimes[i].getY() < 130 && slimes[i].getX() < 300) {
 				slimes[i].moveRight();
 			}
-			if(slimes[i].getX() < 500 && slimes[i].getX() > 400) {
+			
+			//MOVE DOWN PATHWAY
+			if(slimes[i].getX() < 500 && slimes[i].getX() > 405 && slimes[i].getY() < 300) {
 				slimes[i].moveDown();
 			}
-			if(slimes[i].getX() < 500 && slimes[i].getX() > 400 && slimes[i].getY() >410) {
+				
+			//MOVE RIGHT PATHWAY MIDPOINT OF PATH
+			if(slimes[i].getX() < 500 && slimes[i].getX() > 400 && slimes[i].getY() >420) {
 				slimes[i].moveRight();
 			}
-			if(slimes[i].getY() > 500 && slimes[i].getX() < 800) {
+			
+			//MOVE UP PATH
+			if(slimes[i].getY() > 400 && slimes[i].getX() < 750 && slimes[i].getX() >610) {
 				slimes[i].moveUp();
 			}
+			
+			//MOVE RIGHT PATH
+			if(slimes[i].getY() < 30 && slimes[i].getX() < 750 && slimes[i].getX() > 610) {
+				slimes[i].moveRight();
+			}
 
-
-		}
+			//MOVE DOWN PATH
+			
+			if(slimes[i].getY() < 30 && slimes[i].getX() < 900 && slimes[i].getX() > 805) {
+				slimes[i].moveDown();
+			}
+			
+			//FINAL MOVE RIGHT
+			
+			if(slimes[i].getX() < 900 && slimes[i].getX() > 805 && slimes[i].getY() < 350 && slimes[i].getY() > 240) {
+				slimes[i].moveRight();
+			}
+					
+			
+			//RESET 
+			
+			if( slimes[i].getX()> 1000 && slimes[i].getY() <350 ) {
+				slimes[i].reset();
+			}
+			
+		} //close for loop
+		
 		for (Tower tower: towers) {
 			tower.paint(g);
 		}

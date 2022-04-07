@@ -115,6 +115,11 @@ public class SlimeEnemy {
 		sy = 2;
 	}
 	
+	public void reset() {
+		x = -100;
+		y = 350;
+	}
+	
 }
 	
 
