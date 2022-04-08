@@ -36,6 +36,10 @@ public class Level {
 	}
 	
 	public SlimeEnemy spawnEnemy(int x, int y, Object enemyPath)  {
-		return new SlimeEnemy(0, 330);
+		if (enemyCounter < maxNumberOfEnemies && remainingTimeinSeconds() > 0) {
+			enemyCounter ++;
+			return new SlimeEnemy(0, 330);
+		}
+		return null; //no more enemies can be spawn at this point
 	}
 }
