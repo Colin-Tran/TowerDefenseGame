@@ -1,13 +1,13 @@
 
 public class Level {
-	private int mode;
-	private int level;
-	private int maxNumberOfEnemies;
-	private int durationInSeconds;
+	private int mode; //the game mode: easy, med, hard
+	private int level; //1,2,3,etc. 
+	private int maxNumberOfEnemies; //each level has a number of enemies that get created
+	private int durationInSeconds; //time for the level before it runs out
 	
-	private long startTime;
-	private int enemyCounter;
-	private boolean isStarted;
+	private long startTime; //when the level gets started
+	private int enemyCounter; //number of enemies created
+	private boolean isStarted; //if the playing at this level started yet
 	
 	public Level(int mode, int level) {
 		this.mode = mode;
