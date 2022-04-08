@@ -13,10 +13,12 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.JButton;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	public int finalScore = 0;
 	
+
 	//CREATE THE OBJECT (STEP 1)
 	Background 	bg 	= new Background(0, 0);
 //	SlimeEnemy slime = new SlimeEnemy(100,250);
@@ -24,8 +26,20 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Tower[] towers = {new PelletTower(730, 220, 75, 75), 
 			new PelletTower(230, 320, 75, 75)};
 	
+	private JButton[][] t = new JButton[5][10];
+
+		
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		for(int r = 0; r <t.length; r++) {
+			for(int c = 0; c < t[r].length; c++) {
+		t[r][c] = new JButton();
+		t[r][c].setSize(100, 100);
+		}	
+		
+		}
+		
 		//g.drawRect(mainChar.x, mainChar.y, mainChar.getWidth(), mainChar.getHeight());
 		//g.drawRect(asteroidL.x, asteroidL.y, asteroidL.getWidth(), asteroidL.getHeight());
 		
@@ -123,12 +137,35 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			slimes[i] = new SlimeEnemy(0, 330);
 		}
 		
-		JFrame f = new JFrame("Plants vs Zombies");
+		JFrame f = new JFrame("Tower Defense");
+	/*	for(int r = 0; r < t.length; r++) {
+			for(int c = 0; c<t.length; c++) {
+				f.add(t[r][c]);
+			}
+			
+				JButton tr= new JButton();
+		tr.setSize(0, 0);
+		f.add(tr);
+		}*/
+	
+		
 		f.setSize(new Dimension(1300, 500));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.setResizable(false);
-		f.setLayout(new GridLayout(1,2));
+		f.setLayout(new GridLayout(5, 10, 10, 10)); //(rows, cols, hgap, vgap)
+
+		JButton btn;
+		for (int i=0; i<5; i++) {
+		    for (int j=0; j< 10; j++) {
+		        btn = new JButton();
+		        btn.setPreferredSize(new Dimension(100, 100));
+		        f.add(btn);
+		        
+		    }
+		    
+		    }
+		
 		f.addMouseListener(this);
 		f.addKeyListener(this);
 		Timer t = new Timer(16, this);

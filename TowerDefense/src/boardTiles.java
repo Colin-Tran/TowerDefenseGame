@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -5,41 +6,40 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.Random;
+import javax.swing.JButton;
 
-public class SlimeEnemy {
+public class boardTiles{
 	private int width;
 	private int height;
-	private int health;
 	private String fileName; 
-	private int sx;//slime x movement
-	private int sy;//slime y movement
-	
-	//for movement
-
-
+	private JButton[][] t = new JButton[5][10];
 	//add location attributes
+	
 	private Image img; 	
 	private AffineTransform tx;
-	//scaling variables to easily change and try different scales later
-	private double scaleW=1.0, scaleH = 1.0; 
 	public int x, y;
 	
-	public SlimeEnemy(int newX, int newY) {
-		img = getImage("/imgs/recoloredSlime.gif"); //load the image for Tree
+	public boardTiles(int newX, int newY) {
+		img = getImage(""); //load the image for Tree
 	
 		//initialize the location of the image
 		x = newX;
 		y = newY;
 		
-		
+		height = 100;
+		width = 100;
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 
 		//use your variables
-		width = 90;
-		height = 80;
-		health = 100;
-		sx = 0;
-		sy = 0;
+		
+		//find out how to initialize all vars to this
+		for(int r = 0; r <t.length; r++) {
+			for(int c = 0; c < t[r].length; c++) {
+		t[r][c] = new JButton();
+		t[r][c].setSize(width, height);
+		}		
+		}
+		
 	}
 	
 	
@@ -48,12 +48,15 @@ public class SlimeEnemy {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
 		//call update to update the actually picture location
 		update();
 		
 		
-		
+		for(int row = 0; row < t.length; row++) {
+			for(int col = 0; col <t[row].length; col++) {
+				
+			}
+		}
 		
 		g2.drawImage(img, tx, null);
 		
@@ -64,8 +67,7 @@ public class SlimeEnemy {
 	private void update() {
 		tx.setToTranslation(x, y);
 		tx.scale(0.8,0.8);
-		x += sx;
-		y += sy;
+	
 		
 	}
 	
@@ -84,6 +86,9 @@ public class SlimeEnemy {
 		}
 		return tempImage;
 	}
+	
+	
+	
 	public int getX() {
 		return x;
 	}
@@ -92,34 +97,4 @@ public class SlimeEnemy {
 		return y;
 	}
 	
-	public void removeHealth() {
-		health-= 10;
-	}
-	
-	public void moveRight () {
-		sx = 2;
-		sy = 0;
-	}
-	public void moveLeft() {
-		sx = -2;
-		sy = 0;
-	}
-	
-	public void moveUp() {
-		sx = 0;
-		sy = -2;
-	}
-	
-	public void moveDown() {
-		sx = 0;
-		sy = 2;
-	}
-	
-	public void reset() {
-		x = -100;
-		y = 350;	}
-	
 }
-	
-
-	
