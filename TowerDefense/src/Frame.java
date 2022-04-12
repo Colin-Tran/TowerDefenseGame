@@ -34,7 +34,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		bg.paint(g);
 
 		for(int i = 0; i < slimes.length; i++) {
-			slimes[i].paint(g);
+			if(slimes[i].getX() <= 930) {
+				slimes[i].paint(g);
+			}
 		}
 		
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
@@ -93,9 +95,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			
 			//RESET 
 			
-			if( slimes[i].getX()> 1000 && slimes[i].getY() <350 ) {
-				slimes[i].reset();
-			}
+			//if( slimes[i].getX()> 1000 && slimes[i].getY() <350 ) {
+				//slimes[i].reset();
+			//}
 			
 		} //close for loop
 		

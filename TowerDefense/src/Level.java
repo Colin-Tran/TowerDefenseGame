@@ -14,7 +14,7 @@ public class Level {
 	public Level(int mode, int level) {
 		this.mode = mode;
 		this.level = level;
-		maxNumberOfEnemies = 5 * level;	
+		maxNumberOfEnemies = 25 * level;	
 		durationInSeconds = 10020 + level * 3;
 		startTime = 0;
 		enemyCounter = 0;
