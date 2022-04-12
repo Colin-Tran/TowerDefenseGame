@@ -10,43 +10,35 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
-	public int finalScore = 0;
 	
-	//CREATE THE OBJECT (STEP 1)
-	Background 	bg 	= new Background(0, 0);
-//	SlimeEnemy slime = new SlimeEnemy(100,250);
-	SlimeEnemy[] slimes = new SlimeEnemy[50];
-	Tower[] towers = {new PelletTower(730, 220, 75, 75), 
-			new PelletTower(230, 320, 75, 75)};
-	
+	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
+	GameComponents components = new GameComponents();
+
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		//g.drawRect(mainChar.x, mainChar.y, mainChar.getWidth(), mainChar.getHeight());
-		//g.drawRect(asteroidL.x, asteroidL.y, asteroidL.getWidth(), asteroidL.getHeight());
 		
-		//p5 collision import link if needed = https://github.com/bmoren/p5.collide2D
+		//get the components, based on the current Game mode and level
+		Background bg = components.getBackground();
+		ArrayList<SlimeEnemy> enemies = components.getEnemies(0, 330);
+		if(enemies.size() != slimes.length) {
+			slimes = convertToArray(enemies);
+		}
 		
-		
-	//10X5 BACKGROUND SQUARES
-		//paint objects
 		bg.paint(g);
-	//	slime.paint(g);
-		for(int i = 0; i < slimes.length-1; i++) {
+
+		for(int i = 0; i < slimes.length; i++) {
 			slimes[i].paint(g);
 		}
+		
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
-
-		
-
-		
 		g.setColor(color);
-
-		
 		Font stringFont = new Font( "SansSerif", Font.BOLD, 40 );
 		g.setFont(stringFont);
 		
@@ -107,22 +99,27 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			
 		} //close for loop
 		
-		for (Tower tower: towers) {
+		for (Tower tower: components.getTowers()) {
 			tower.paint(g);
 		}
 		
 	}
 		
+	private static SlimeEnemy[] convertToArray(ArrayList<SlimeEnemy> enemies) {
+		SlimeEnemy[] array = new SlimeEnemy[enemies.size()];
+		for(int i = 0; i < enemies.size(); i++) {
+			array[i] = enemies.get(i);
+		}
+		return array;
+	}
 	
 	public static void main(String[] arg) {
 		Frame f = new Frame();
 	}
 	
 	public Frame() {
-		for(int i = 0; i < slimes.length; i++) {
-			slimes[i] = new SlimeEnemy(0, 330);
-		}
-		
+		initializeGame();
+
 		JFrame f = new JFrame("Plants vs Zombies");
 		f.setSize(new Dimension(1300, 500));
 		f.setBackground(Color.blue);
@@ -138,9 +135,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 	
 	}
-	
-	
-	
+	private void initializeGame() {
+		Game.instance.startGame(); //creates the 1st Level
+		Game.instance.getLevel().startLevel(); //starts the timer for the current level
+		components.addTower(new PelletTower(730, 220, 75, 75));
+		components.addTower(new PelletTower(230, 320, 75, 75));
+	}
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

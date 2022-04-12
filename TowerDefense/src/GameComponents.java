@@ -6,14 +6,23 @@ public class GameComponents {
 	private ArrayList<SlimeEnemy> enemies;
 	
 	public GameComponents() {
-		
+		towers = new ArrayList<Tower>();
+		towerTypes = new ArrayList<Tower>();
+		enemies = new ArrayList<SlimeEnemy>();
 	}
 	
 	public Background getBackground() {
+		if(background == null) {
+			background = new Background(0, 0);
+		}
 		return background;
 	}
 	
 	public ArrayList<Tower> getTowerTypes(int x, int y, int w, int h) {
+		if(towerTypes.size() == 0) {
+			towerTypes.add(new PelletTower(x, y, w, h));
+			//towerTypes.add(new PelletTower(x+w, y, w, h));
+		}
 		return towerTypes;
 	}
 	
@@ -22,10 +31,15 @@ public class GameComponents {
 	}
 	
 	public void addTower(Tower tower) {
-		
+		towers.add(tower);
 	}
 	
-	public ArrayList<SlimeEnemy> getEnemies() {
+	public ArrayList<SlimeEnemy> getEnemies(int x, int y) {
+		SlimeEnemy temp = Game.instance.getLevel().spawnEnemy(x, y, null);
+		if(temp != null) {
+			enemies.add(temp);
+		}
+		
 		return enemies;
 	}
 }

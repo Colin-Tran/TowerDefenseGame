@@ -2,24 +2,26 @@
 public class Game {
 	private int mode;
 	private boolean isStarted;
-	private int level = 1;
+	private int levelNumber = 1;
 	private Player player;
-	private Level theLevel = null;
-	public static Game instance;
+	private Level level = null;
+	
+	public static Game instance = new Game();
 	
 	public Game() {
-		instance = new Game();
+		
 	}
 	
 	public int getGameMode() {
 		return mode;
 	}
 	
-	public void setGamemode(int n) {
+	public void setGameMode(int n) {
 		mode = n;
 	}
 	
 	public void startGame() {
+		level = new Level(mode, levelNumber);
 		isStarted = true;
 	}
 	
@@ -27,8 +29,8 @@ public class Game {
 		return isStarted;
 	}
 	
-	public Level getlevel() {
-		return theLevel;
+	public Level getLevel() {
+		return level;
 	}
 	
 	public boolean advanceLevel() {
