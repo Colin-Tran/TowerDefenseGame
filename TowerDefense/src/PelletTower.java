@@ -14,7 +14,7 @@ public class PelletTower extends Tower {
 	public PelletTower(
 			int x, int y, int width, int height) {
 		
-		super ("Pellet Tower", 10, 2, 1, 1,
+		super ("Pellet Tower", 10, 2, 1.75, 1,
 		x,y,width, height, "/imgs/pellettower.png");
 	}
 
@@ -22,14 +22,11 @@ public class PelletTower extends Tower {
 		
 		//draw the circle for the range
 		g.setColor(Color.GRAY);
-		Point center = super.getCenter();
-		g.drawOval(x-range*width, 
-				y-range*height, 
-				width*(2*range+1), height*(2*range+1));
+		g.drawOval((int) (x-range*width), (int) (y-range*height), 
+				(int) (width*(2*range+1)), (int) (height*(2*range+1)));
 		g.setColor(new Color(64,64,64,64));
-		g.fillOval(x-range*width, 
-				y-range*height, 
-				width*(2*range+1), height*(2*range+1));
+		g.fillOval((int) (x-range*width), (int) (y-range*height), 
+				(int) (width*(2*range+1)), (int) (height*(2*range+1)));
 		
 		super.paint(g); //adds the image
 	

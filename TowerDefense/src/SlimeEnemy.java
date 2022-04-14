@@ -13,7 +13,7 @@ public class SlimeEnemy {
 	private String fileName; 
 	private int sx;//slime x movement
 	private int sy;//slime y movement
-	
+	private boolean hasEscaped;
 	//for movement
 
 
@@ -40,6 +40,7 @@ public class SlimeEnemy {
 		health = 100;
 		sx = 0;
 		sy = 0;
+		hasEscaped = false;
 	}
 	
 	
@@ -48,18 +49,13 @@ public class SlimeEnemy {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
-		//call update to update the actually picture location
-		update();
-		
-		
-		
-		
-		g2.drawImage(img, tx, null);
-		
-		
-
+		if (isAlive()) {
+			//call update to update the actually picture location
+			update();
+			g2.drawImage(img, tx, null);
+		}
 	}
+	
 	/* update the picture variable location */
 	private void update() {
 		tx.setToTranslation(x, y);
@@ -120,6 +116,13 @@ public class SlimeEnemy {
 		y = 350;
 	}
 	
+	public void hasEscaped() {
+		hasEscaped = true;
+	}
+	
+	public boolean isAlive() {
+		return !hasEscaped && health >0;
+	}
 }
 	
 

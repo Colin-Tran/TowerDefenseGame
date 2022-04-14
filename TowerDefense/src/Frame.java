@@ -27,14 +27,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//get the components, based on the current Game mode and level
 		Background bg = components.getBackground();
 		ArrayList<SlimeEnemy> enemies = components.getEnemies(0, 330);
-		if(enemies.size() != slimes.length) {
-			slimes = convertToArray(enemies);
-		}
+		slimes = convertToArray(enemies);
 		
 		bg.paint(g);
 
 		for(int i = 0; i < slimes.length; i++) {
-			if(slimes[i].getX() <= 930) {
+			if(slimes[i].getX() >= 930) { //if out of screen, don't paint enemies
+				slimes[i].hasEscaped();
+				Game.instance.getPlayer().loseLife();
+			}else {
 				slimes[i].paint(g);
 			}
 		}
@@ -102,6 +103,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		} //close for loop
 		
 		for (Tower tower: components.getTowers()) {
+			tower.fireEnemies(enemies);
 			tower.paint(g);
 		}
 		
@@ -138,10 +140,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	}
 	private void initializeGame() {
-		Game.instance.startGame(); //creates the 1st Level
-		Game.instance.getLevel().startLevel(); //starts the timer for the current level
+		Game.instance.getLevel().startEnemySpawning(); //level
 		components.addTower(new PelletTower(730, 220, 75, 75));
-		components.addTower(new PelletTower(230, 320, 75, 75));
+		components.addTower(new PelletTower(230, 300, 75, 75));
 	}
 	
 	@Override
@@ -180,10 +181,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
-
-			System.out.println(arg0.getKeyCode());
-			
+		System.out.println(arg0.getKeyCode());		
 	}
 
 	@Override

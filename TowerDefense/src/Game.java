@@ -1,15 +1,17 @@
 
 public class Game {
 	private int mode;
-	private boolean isStarted;
-	private int levelNumber = 1;
+	private int levelNumber;
 	private Player player;
-	private Level level = null;
+	private Level level;
 	
 	public static Game instance = new Game();
 	
 	public Game() {
-		
+		player = new Player();
+		levelNumber = 1;
+		mode = 0;
+		level = new Level(mode, levelNumber);
 	}
 	
 	public int getGameMode() {
@@ -20,14 +22,6 @@ public class Game {
 		mode = n;
 	}
 	
-	public void startGame() {
-		level = new Level(mode, levelNumber);
-		isStarted = true;
-	}
-	
-	public boolean isStarted() {
-		return isStarted;
-	}
 	
 	public Level getLevel() {
 		return level;
@@ -36,16 +30,19 @@ public class Game {
 	public boolean advanceLevel() {
 		return true;
 	}
+	
 	public boolean isGameOver() {
 		if(player.getLives() <= 0 ) {
 			return true;
 		}
 		return false;
 	}
+	
 	public void hitEnemy(SlimeEnemy enemy) {
 		
 	}
-	public void enemyEscaped(SlimeEnemy enemy) {
-		player.setLives(player.getLives()-1);//decremts the lives
+	
+	public Player getPlayer() {
+		return player;
 	}
 }

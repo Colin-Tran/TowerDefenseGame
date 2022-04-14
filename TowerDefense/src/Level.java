@@ -22,7 +22,7 @@ public class Level {
 		lastSpawnTime = 0;
 	}
 	
-	public void startLevel() {
+	public void startEnemySpawning() {
 		if(!isStarted) {
 			startTime = System.currentTimeMillis();
 			isStarted = true;

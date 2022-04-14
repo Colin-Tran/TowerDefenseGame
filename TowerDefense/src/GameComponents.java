@@ -40,6 +40,13 @@ public class GameComponents {
 			enemies.add(temp);
 		}
 		
+		//remove enemies that escaped or have no health left
+		for(int i = 0; i < enemies.size(); i++) {
+			if(!enemies.get(i).isAlive()) {
+				enemies.remove(i);
+				i--;
+			}
+		}
 		return enemies;
 	}
 }
