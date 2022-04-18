@@ -155,4 +155,9 @@ public abstract class Tower { //you can not instantiate Tower class
 		
 		return degrees;
 	}
+	
+	public void setLocation(int newX, int newY) {
+		x = newX;
+		y = newY;
+	}
 }

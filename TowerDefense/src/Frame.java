@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -124,7 +125,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public Frame() {
 		initializeGame();
 
-		JFrame f = new JFrame("Plants vs Zombies");
+		JFrame f = new JFrame("Tower Defense");
 		f.setSize(new Dimension(1300, 500));
 		f.setBackground(Color.blue);
 		f.add(this);
@@ -145,7 +146,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		components.addTower(new PelletTower(230, 300, 75, 75));
 	}
 	
+
+	
 	@Override
+	
 	public void mouseClicked(MouseEvent arg0) {
 	
 		
@@ -153,7 +157,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+	
 	}
 
 	@Override
@@ -163,7 +167,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+		for(Tower tower: components.getTowers()) {
+			if( arg0.getX() < 1500 && arg0.getY() < 1000) {
+				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 	
+				repaint();
+			}
+		}
+		
 	}
 
 	@Override
@@ -181,7 +192,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		System.out.println(arg0.getKeyCode());		
+		/*if(arg0.getKeyCode() == 8) {
+			for(Tower tower: components.getTowers()) {
+				for(int i = 0; i < components.getTowers().size() ; i++) {
+				components.getTowers().get(i).setLocation(-1000, -1000);
+				}
+			}
+			
+		}
+		
+		NEED TO FIND OUT HOW TO REMOVE PLACED TOWERS
+		*/
+		System.out.println(arg0.getKeyCode());	
 	}
 
 	@Override
