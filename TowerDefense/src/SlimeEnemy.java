@@ -123,6 +123,14 @@ public class SlimeEnemy {
 	public boolean isAlive() {
 		return !hasEscaped && health >0;
 	}
+	
+	public void setLocation(int newx, int newy) {
+		x = newx;
+		y = newy;
+	}
+	public boolean locationSet() {
+		return true;
+	}
 }
 	
 
