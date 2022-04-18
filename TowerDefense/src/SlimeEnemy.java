@@ -128,9 +128,7 @@ public class SlimeEnemy {
 		x = newx;
 		y = newy;
 	}
-	public boolean locationSet() {
-		return true;
-	}
+	
 }
 	
 

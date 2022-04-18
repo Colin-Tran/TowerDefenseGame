@@ -192,15 +192,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		/*if(arg0.getKeyCode() == 8) {
+		if(arg0.getKeyCode() == 8) {
 			for(Tower tower: components.getTowers()) {
-				for(int i = 0; i < components.getTowers().size() ; i++) {
-				components.getTowers().get(i).setLocation(-1000, -1000);
+				for(int i = 0; i < components.getTowers().size()-1 ; i++) { //always leaves 1 tower so can place more
+				//components.getTowers().get(i).setLocation(-1000, -1000);
+				components.getTowers().remove(i);
+
 				}
 			}
 			
-		}
-		
+		}	
+		/*
 		NEED TO FIND OUT HOW TO REMOVE PLACED TOWERS
 		*/
 		System.out.println(arg0.getKeyCode());	
