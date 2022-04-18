@@ -24,6 +24,8 @@ public abstract class Tower { //you can not instantiate Tower class
 	protected int x, y; //x and y of the left top corner of the tower
 	protected int width, height; //width and height of the tower
 	protected int rotation; //angle for direction of the attack
+	protected SlimeEnemy enemy;//the enemy to shoot at
+	protected int cannonPosition;//the position of the cannon
 	
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
 	
@@ -53,6 +55,9 @@ public abstract class Tower { //you can not instantiate Tower class
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawRect(x, y, width, height); //shows the borders of the tower
 		g2.drawImage(img, tx, null);
+		if(cannonPosition == 0) {
+			
+		}
 	}
 	
 	private void initAffineTransform(double a, double b) {	
@@ -102,7 +107,7 @@ public abstract class Tower { //you can not instantiate Tower class
 			Point enemyCenter = new Point(
 					enemy.getX()+width/2, enemy.getY() + height/2);
 			int newRotation = (int) angle(towerCenter, enemyCenter);
-			if (rotation != newRotation) {
+			if (rotation != newRotation) {//if the rotation is not the same as the new rotation
 				rotation = newRotation;
 				initAffineTransform(x, y);
 				//System.out.println("rotation = " + rotation + 
@@ -121,7 +126,7 @@ public abstract class Tower { //you can not instantiate Tower class
 			Point enemyCenter = new Point(
 					enemies.get(i).getX()+width/2, enemies.get(i).getY() + height/2);
 			
-			if(distance(towerCenter,enemyCenter) < rangeDistance) {
+			if(distance(towerCenter,enemyCenter) < rangeDistance) {//if the distance is less than the range
 				//System.out.println("enemy " + i + " in range");
 				return enemies.get(i);
 			}
