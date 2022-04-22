@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -56,7 +57,8 @@ public abstract class Tower { //you can not instantiate Tower class
 		g.drawRect(x, y, width, height); //shows the borders of the tower
 		g2.drawImage(img, tx, null);
 		if(cannonPosition == 0) {
-			
+			g.setColor(Color.black);
+			g.fillOval(0,0,10,10);
 		}
 	}
 	
