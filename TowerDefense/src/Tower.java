@@ -97,11 +97,11 @@ public abstract class Tower { //you can not instantiate Tower class
 	}
 	
 	public void fireEnemies(ArrayList<SlimeEnemy> enemies) {
-		SlimeEnemy enemyToShoot = enemyToShootAt(enemies);
-		rotateCannon(enemyToShoot);
+		enemy = enemyToShootAt(enemies);
+		rotateCannon();
 	}
-
-	private void rotateCannon(SlimeEnemy enemy) {
+	
+	private void rotateCannon() {
 		if(enemy != null) {
 			Point towerCenter = getCenter();
 			Point enemyCenter = new Point(
