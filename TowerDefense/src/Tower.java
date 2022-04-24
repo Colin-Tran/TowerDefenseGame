@@ -25,10 +25,13 @@ public abstract class Tower { //you can not instantiate Tower class
 	protected int x, y; //x and y of the left top corner of the tower
 	protected int width, height; //width and height of the tower
 	protected int rotation; //angle for direction of the attack
+	
+	//shooting at enemies
 	protected SlimeEnemy enemy;//the enemy to shoot at
 	protected int cannonPosition;//the position of the cannon
 	
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
+	private int cannonPositionsMax = 25; //how many intermediate steps a cannon ball takes to hit
 	
 	public Tower(String towerType, double cost, int damage, 
 			double range, double speed, 
@@ -56,10 +59,16 @@ public abstract class Tower { //you can not instantiate Tower class
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawRect(x, y, width, height); //shows the borders of the tower
 		g2.drawImage(img, tx, null);
-		if(cannonPosition == 0) {
+		if(cannonPosition > 0) {
 			g.setColor(Color.black);
-			g.fillOval(0,0,10,10);
+			Point enemyCenter = new Point(
+					enemy.getX()+width/2, enemy.getY() + height/2);
+			double xDistance = enemyCenter.getX()-getCenter().getX();
+			double yDistance = enemyCenter.getY()-getCenter().getY();
+			g.fillOval((int) (getCenter().getX()+xDistance*cannonPosition/cannonPositionsMax),
+					(int) (getCenter().getY()+ yDistance*cannonPosition/cannonPositionsMax), 10, 10);
 		}
+		
 	}
 	
 	private void initAffineTransform(double a, double b) {	
@@ -99,8 +108,23 @@ public abstract class Tower { //you can not instantiate Tower class
 	}
 	
 	public void fireEnemies(ArrayList<SlimeEnemy> enemies) {
-		enemy = enemyToShootAt(enemies);
-		rotateCannon();
+		
+		if(enemy != null) {//if the enemy exists continue shooting
+			if (cannonPosition == 0) {
+				cannonPosition = cannonPositionsMax/5; //start a bit further than the middle of tower
+			} else if(cannonPosition < cannonPositionsMax) {
+				cannonPosition++; //move cannon ball closer to the enemy
+			} else if (cannonPosition == cannonPositionsMax) { //hit 
+				enemy.removeHealth();
+				cannonPosition = 0;
+				enemy = null;
+			}
+		} else {//find another enemy to shoot at
+			enemy = enemyToShootAt(enemies);
+			cannonPosition = 0;
+			rotateCannon();
+		}
+		
 	}
 	
 	private void rotateCannon() {
