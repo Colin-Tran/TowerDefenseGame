@@ -29,6 +29,7 @@ public class Game {
 	
 	public boolean advanceLevel() {
 		return true;
+		
 	}
 	
 	public boolean isGameOver() {

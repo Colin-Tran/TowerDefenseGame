@@ -27,19 +27,47 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//get the components, based on the current Game mode and level
 		Background bg = components.getBackground();
+		
 		ArrayList<SlimeEnemy> enemies = components.getEnemies(0, 330);
 		slimes = convertToArray(enemies);
 		
 		bg.paint(g);
-
+		g.setColor(Color.orange);
+		//g.drawString("Lives =" + pl.getLives(), 50, 50);
+		Font myFont = new Font("Serif", Font.BOLD, 30);
+		g.setFont(myFont);
 		for(int i = 0; i < slimes.length; i++) {
 			if(slimes[i].getX() >= 930) { //if out of screen, don't paint enemies
 				slimes[i].hasEscaped();
 				Game.instance.getPlayer().loseLife();
+				
 			}else {
 				slimes[i].paint(g);
 			}
 		}
+		
+		g.drawString("Lives = " + Game.instance.getPlayer().getLives(), 50, 50);
+		//game over
+		if(Game.instance.getPlayer().getLives() < 0) {
+			for(int i = 0; i <slimes.length; i++) {
+				slimes[i].resetStop();
+				components.getTowers().remove(i);
+			}
+		
+					}
+		int counter = 0;
+		for(int i = 0; i < slimes.length; i++) {
+			if(slimes[i].isAlive() == false) {
+				counter++;
+			}
+		}
+		
+		//move onto next level if all slimes are dead
+		if(counter >= slimes.length) {
+			Game.instance.advanceLevel();
+	
+		}
+		g.drawString("LEVEL: " + Game.instance.getLevel().toString(), 0, 450);
 		
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
 		g.setColor(color);
@@ -93,7 +121,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			if(slimes[i].getX() < 900 && slimes[i].getX() > 805 && slimes[i].getY() < 350 && slimes[i].getY() > 240) {
 				slimes[i].moveRight();
 			}
-					
+			
+			
 			
 			//RESET 
 			
@@ -107,6 +136,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			tower.fireEnemies(enemies);
 			tower.paint(g);
 		}
+		
+		
+		
+	
+		
+		
+		
+		
 		
 	}
 		

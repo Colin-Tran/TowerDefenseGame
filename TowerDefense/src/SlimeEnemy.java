@@ -129,6 +129,13 @@ public class SlimeEnemy {
 		y = newy;
 	}
 	
+	public void resetStop() {
+		sx = 0;
+		sy = 0;
+		x = -100;
+		y = 350;
+	}
+	
 }
 	
 

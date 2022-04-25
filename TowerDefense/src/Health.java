@@ -1,5 +1,5 @@
 
-public class Health {
+public class Health extends Player {
 private int total = 200;
 private int slimer = 10;
 	public static void main(String[] args) {
