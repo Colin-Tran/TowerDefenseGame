@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -5,6 +6,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
+import java.util.ArrayList;
 
 public abstract class Tower { //you can not instantiate Tower class
 	
@@ -15,7 +17,7 @@ public abstract class Tower { //you can not instantiate Tower class
 	
 	protected double cost; //how much it costs
 	protected int damage; //the damage it inflicts on enemy
-	protected int range; //number of tiles it can attack enemy
+	protected double range; //number of tiles it can attack enemy
 	protected double speed; //interval between 2 consecutive attacks
 	
 	//drawing info
@@ -24,10 +26,15 @@ public abstract class Tower { //you can not instantiate Tower class
 	protected int width, height; //width and height of the tower
 	protected int rotation; //angle for direction of the attack
 	
+	//shooting at enemies
+	protected SlimeEnemy enemy;//the enemy to shoot at
+	protected int cannonPosition;//the position of the cannon
+	
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
+	private int cannonPositionsMax = 25; //how many intermediate steps a cannon ball takes to hit
 	
 	public Tower(String towerType, double cost, int damage, 
-			int range, double speed, 
+			double range, double speed, 
 			int x, int y, int width, int height, 
 			String imageFile) {
 		
@@ -52,6 +59,16 @@ public abstract class Tower { //you can not instantiate Tower class
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawRect(x, y, width, height); //shows the borders of the tower
 		g2.drawImage(img, tx, null);
+		if(cannonPosition > 0) {
+			g.setColor(Color.black);
+			Point enemyCenter = new Point(
+					enemy.getX()+width/2, enemy.getY() + height/2);
+			double xDistance = enemyCenter.getX()-getCenter().getX();
+			double yDistance = enemyCenter.getY()-getCenter().getY();
+			g.fillOval((int) (getCenter().getX()+xDistance*cannonPosition/cannonPositionsMax),
+					(int) (getCenter().getY()+ yDistance*cannonPosition/cannonPositionsMax), 10, 10);
+		}
+		
 	}
 	
 	private void initAffineTransform(double a, double b) {	
@@ -90,5 +107,88 @@ public abstract class Tower { //you can not instantiate Tower class
 		return new Point(centerX, centerY);
 	}
 	
-
+	public void fireEnemies(ArrayList<SlimeEnemy> enemies) {
+		
+		if(enemy != null) {//if the enemy exists continue shooting
+			if (cannonPosition == 0) {
+				cannonPosition = cannonPositionsMax/5; //start a bit further than the middle of tower
+			} else if(cannonPosition < cannonPositionsMax) {
+				cannonPosition++; //move cannon ball closer to the enemy
+			} else if (cannonPosition == cannonPositionsMax) { //hit 
+				enemy.removeHealth();
+				cannonPosition = 0;
+				enemy = null;
+			}
+		} else {//find another enemy to shoot at
+			enemy = enemyToShootAt(enemies);
+			cannonPosition = 0;
+			rotateCannon();
+		}
+		
+	}
+	
+	private void rotateCannon() {
+		if(enemy != null) {
+			Point towerCenter = getCenter();
+			Point enemyCenter = new Point(
+					enemy.getX()+width/2, enemy.getY() + height/2);
+			int newRotation = (int) angle(towerCenter, enemyCenter);
+			if (rotation != newRotation) {//if the rotation is not the same as the new rotation
+				rotation = newRotation;
+				initAffineTransform(x, y);
+				//System.out.println("rotation = " + rotation + 
+			     //		"; enemy Center = " + enemyCenter);
+			}
+			
+			
+		}
+	}
+	
+	private SlimeEnemy enemyToShootAt(ArrayList<SlimeEnemy> enemies) {
+		double rangeDistance = (range+1)*width;//range in pixels
+		Point towerCenter = getCenter();
+		
+		for(int i = 0; i < enemies.size(); i++) {//iterate through the list to find the best enemy
+			Point enemyCenter = new Point(
+					enemies.get(i).getX()+width/2, enemies.get(i).getY() + height/2);
+			
+			if(distance(towerCenter,enemyCenter) < rangeDistance) {//if the distance is less than the range
+				//System.out.println("enemy " + i + " in range");
+				return enemies.get(i);
+			}
+		}
+		return null;
+	}
+	
+	private static double distance(Point p1, Point p2) {
+		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) +
+				Math.pow(p1.getY()-p2.getY(), 2));
+	}
+	
+	private static double angle(Point p1, Point p2) {
+		double deltaX = p1.getX()-p2.getX();
+		double deltaY = p1.getY()-p2.getY();
+		
+		double degrees = Math.toDegrees(Math.atan(Math.abs(deltaX/deltaY)));
+		if (deltaX >=0) {
+			if (deltaY >= 0) {
+				degrees = degrees * -1;//point 2 is left top
+			}else {
+				degrees = degrees + 180;//point 2 is left bottom
+			}
+		}else {
+			if (deltaY >= 0) { //point 2 is top right
+				//nothing to adjust
+			}else {
+				degrees = 180 - degrees;//point 2 is bottom right
+			}
+		}
+		
+		return degrees;
+	}
+	
+	public void setLocation(int newX, int newY) {
+		x = newX;
+		y = newY;
+	}
 }
