@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -53,6 +54,8 @@ public class SlimeEnemy {
 			//call update to update the actually picture location
 			update();
 			g2.drawImage(img, tx, null);
+			g.setColor(Color.green);
+			g.fillRect(x, y+30, health, 10);
 		}
 	}
 	
