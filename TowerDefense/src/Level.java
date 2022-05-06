@@ -52,6 +52,7 @@ public class Level {
 			return new SlimeEnemy(0, 330);
 		}
 		//System.out.println("not spawning");
+		
 		return null; //no more enemies can be spawn at this point
 	}
 }
