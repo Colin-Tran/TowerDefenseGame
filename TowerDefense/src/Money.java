@@ -7,11 +7,10 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Money {
-private int start = 100;
-private int roundend = 30;
+private int roundend = 30; //you get 30 bucks at the end of each round
 int x = 925;
 int y = -45;
-int cost;
+int cost; //initialize cost of money
 
 private Image img; 	
 private AffineTransform tx;
@@ -26,9 +25,7 @@ init(x, y);
 }
 
 	
-	public void roundEnd() {
-		start += roundend;
-	}
+
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;

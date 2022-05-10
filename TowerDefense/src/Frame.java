@@ -21,7 +21,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
 	GameComponents components = new GameComponents();
-	Money wallet = new Money(100);
+	Money wallet = new Money(100); //start out with 100 bucks
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
