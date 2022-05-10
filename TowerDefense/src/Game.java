@@ -27,10 +27,15 @@ public class Game {
 		return level;
 	}
 	
+	public void setLevel(Level newLevel) {
+		this.level = newLevel;
+	}
+	
 	public boolean advanceLevel() {
 		return true;
 		
 	}
+	
 	
 	public boolean isGameOver() {
 		if(player.getLives() <= 0 ) {

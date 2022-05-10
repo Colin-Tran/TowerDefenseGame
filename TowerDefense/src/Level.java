@@ -22,11 +22,16 @@ public class Level {
 		lastSpawnTime = 0;
 	}
 	
+	
+	
 	public void startEnemySpawning() {
 		if(!isStarted) {
 			startTime = System.currentTimeMillis();
 			isStarted = true;
 		}
+	}
+	public void setTime(int durationS) {
+		durationInSeconds = durationS;
 	}
 	
 	public int remainingTimeinSeconds() {
@@ -36,6 +41,10 @@ public class Level {
 			return n;
 		}
 		return 0;
+	}
+	
+	public int getMaxNumEnemies() {
+		return maxNumberOfEnemies;
 	}
 	
 	private double secondsSinceLastSpawn() {
