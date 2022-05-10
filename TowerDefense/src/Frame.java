@@ -21,7 +21,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
 	GameComponents components = new GameComponents();
-
+	Money wallet = new Money(100);
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
@@ -30,7 +30,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		ArrayList<SlimeEnemy> enemies = components.getEnemies(0, 330);
 		slimes = convertToArray(enemies);
-		
 		bg.paint(g);
 		g.setColor(Color.orange);
 		//g.drawString("Lives =" + pl.getLives(), 50, 50);
@@ -45,6 +44,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				slimes[i].paint(g);
 			}
 		}
+		wallet.paint(g);
 		
 		g.drawString("Lives = " + Game.instance.getPlayer().getLives(), 50, 50);
 		//game over

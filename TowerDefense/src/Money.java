@@ -9,17 +9,20 @@ import java.net.URL;
 public class Money {
 private int start = 100;
 private int roundend = 30;
-int x;
-int y;
-int sx;
-int sy;
+int x = 925;
+int y = -45;
+int cost;
+
 private Image img; 	
 private AffineTransform tx;
 
-public Money(int newX, int newY) {
+public Money(int ncost) {
 	img = getImage("/imgs/wolverine bucks.png"); //load the image for Tree
-x = newX;
-y = newY;
+cost = ncost;
+
+
+tx = AffineTransform.getTranslateInstance(x, y );
+init(x, y); 
 }
 
 	
@@ -29,16 +32,16 @@ y = newY;
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		
+		update();
+		g2.drawImage(img, tx, null);
 
 	}
 	
 	/* update the picture variable location */
 	private void update() {
 		tx.setToTranslation(x, y);
-		tx.scale(0.8,0.8);
-		x += sx;
-		y += sy;
+		tx.scale(0.3,0.3);
+
 		
 	}
 	
