@@ -75,7 +75,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					Game.instance.getLevel().spawnEnemy(0, 330, null);
 					levelCounter++;
 					
+					wallet.addMoneyRound();
 				}
+				
 				g.drawString("LEVEL: " + levelCounter, 0, 450);
 				int counter = 0;
 				for(int i = 0; i < slimes.length; i++) {
@@ -89,7 +91,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Game.instance.advanceLevel();
 	
 		}
-		g.drawString("LEVEL: " + Game.instance.getLevel().toString(), 0, 450);
+	
 		g.drawString("Money: " + wallet.getTotal(), 1100, 450);
 
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
@@ -159,12 +161,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			tower.fireEnemies(enemies);
 			tower.paint(g);
 		}
-		
-		
-		
-	
-		
-		
 		
 		
 		
