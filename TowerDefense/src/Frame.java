@@ -21,7 +21,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
 	GameComponents components = new GameComponents();
-
+	Money wallet = new Money(100); //start out with 100 bucks
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
@@ -30,7 +30,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		ArrayList<SlimeEnemy> enemies = components.getEnemies(0, 330);
 		slimes = convertToArray(enemies);
-		
 		bg.paint(g);
 		g.setColor(Color.orange);
 		//g.drawString("Lives =" + pl.getLives(), 50, 50);
@@ -45,6 +44,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				slimes[i].paint(g);
 			}
 		}
+		wallet.paint(g);
 		
 		g.drawString("Lives = " + Game.instance.getPlayer().getLives(), 50, 50);
 		//game over
@@ -68,7 +68,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 		}
 		g.drawString("LEVEL: " + Game.instance.getLevel().toString(), 0, 450);
-		
+		g.drawString("Money: " + wallet.getTotal(), 1100, 450);
+
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
 		g.setColor(color);
 		Font stringFont = new Font( "SansSerif", Font.BOLD, 40 );
@@ -205,9 +206,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		for(Tower tower: components.getTowers()) {
-			if( arg0.getX() < 1500 && arg0.getY() < 1000) {
+			if( arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.towerCost) {
 				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
-	
+				wallet.buyTower();
 				repaint();
 			}
 		}
