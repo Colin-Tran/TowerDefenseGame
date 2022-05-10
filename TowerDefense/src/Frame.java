@@ -20,6 +20,7 @@ import javax.swing.Timer;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
 	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
+	Level lvl2 = new Level(2, 2);
 	GameComponents components = new GameComponents();
 	Money wallet = new Money(100); //start out with 100 bucks
 	public void paint(Graphics g) {
@@ -55,12 +56,33 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}
 		
 					}
-		int counter = 0;
-		for(int i = 0; i < slimes.length; i++) {
-			if(slimes[i].isAlive() == false) {
-				counter++;
-			}
-		}
+		
+		int levelCounter = 1;
+		
+		//next level
+				int numEnemy = Game.instance.getLevel().getMaxNumEnemies() -50;
+				
+				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size()< 1) {
+					/*Game.instance.advanceLevel();
+				//	for(int i = 0; i < 5; i++) {
+					//int levelTime = i *1000;
+				//}
+				
+				if(Game.instance.advanceLevel()) {*/
+					
+					Game.instance.setLevel(lvl2);
+					Game.instance.getLevel().startEnemySpawning();
+					Game.instance.getLevel().spawnEnemy(0, 330, null);
+					levelCounter++;
+					
+				}
+				g.drawString("LEVEL: " + levelCounter, 0, 450);
+				int counter = 0;
+				for(int i = 0; i < slimes.length; i++) {
+					if(slimes[i].isAlive() == false) {
+						counter++;
+					}
+				}
 		
 		//move onto next level if all slimes are dead
 		if(counter >= slimes.length) {
