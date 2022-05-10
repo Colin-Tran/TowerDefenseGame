@@ -10,14 +10,14 @@ public class Money {
 private int roundend = 30; //you get 30 bucks at the end of each round
 int x = 925;
 int y = -45;
-int cost; //initialize cost of money
-
+int total; //initialize cost of money
+static int towerCost = 30;
 private Image img; 	
 private AffineTransform tx;
 
 public Money(int ncost) {
 	img = getImage("/imgs/wolverine bucks.png"); //load the image for Tree
-cost = ncost;
+total = ncost;
 
 
 tx = AffineTransform.getTranslateInstance(x, y );
@@ -57,7 +57,14 @@ init(x, y);
 		}
 		return tempImage;
 	
-	
+
 	
 }
+	public void buyTower() {
+		total -= towerCost; //cost of tower is 50
+	}
+	public int getTotal() {
+		return total;
+	}
+	
 }
