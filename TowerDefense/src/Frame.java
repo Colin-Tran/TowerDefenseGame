@@ -203,6 +203,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		components.addTower(new PelletTower(230, 300, 75, 75));
 	}
 	
+	int tank = 0;
 
 	
 	@Override
@@ -225,8 +226,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		for(Tower tower: components.getTowers()) {
-			if( arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.towerCost) {
+			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.towerCost && tank == 0) {
 				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
+				wallet.buyTower();
+				repaint();
+			}
+			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.towerCost && tank == 1) {
+				components.getTowers().add(new SquirtTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buyTower();
 				repaint();
 			}
@@ -258,7 +264,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 			
-		}	
+		}
+		if(arg0.getKeyCode() == 49) {
+			tank = 0;
+		}else if(arg0.getKeyCode() == 50) {
+			tank = 1;
+		}
 		/*
 		NEED TO FIND OUT HOW TO REMOVE PLACED TOWERS
 		*/
@@ -278,7 +289,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
