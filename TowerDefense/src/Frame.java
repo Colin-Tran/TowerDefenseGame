@@ -226,14 +226,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		for(Tower tower: components.getTowers()) {
-			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.towerCost && tank == 0) {
+			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.pelTowerCost && tank == 0) {
 				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
-				wallet.buyTower();
+				wallet.buyPelTower();
 				repaint();
 			}
-			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.towerCost && tank == 1) {
+			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.squTowerCost && tank == 1) {
 				components.getTowers().add(new SquirtTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
-				wallet.buyTower();
+				wallet.buySquTower();
 				repaint();
 			}
 		}

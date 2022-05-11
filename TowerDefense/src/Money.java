@@ -12,7 +12,8 @@ int x = 925;
 int y = -45;
 int total; //initialize cost of money
 int max = 300;
-static int towerCost = 30;
+static int pelTowerCost = 30;
+static int squTowerCost = 40;
 private Image img; 	
 private AffineTransform tx;
 
@@ -61,8 +62,11 @@ init(x, y);
 
 	
 }
-	public void buyTower() {
-		total -= towerCost; //cost of tower is 50
+	public void buyPelTower() {
+		total -= pelTowerCost; //cost of tower is 50
+	}
+	public void buySquTower() {
+		total -= squTowerCost; //cost of tower is 50
 	}
 	public int getTotal() {
 		return total;
