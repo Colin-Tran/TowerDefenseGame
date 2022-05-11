@@ -68,6 +68,6 @@ init(x, y);
 	}
 	
 	public void addMoneyRound() {
-		total += 20;
+		total = total + 20;
 	}
 }

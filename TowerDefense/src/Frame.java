@@ -62,7 +62,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//next level
 				int numEnemy = Game.instance.getLevel().getMaxNumEnemies() -50;
 				
-				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size()< 1) {
+				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size() < 1) {
 					/*Game.instance.advanceLevel();
 				//	for(int i = 0; i < 5; i++) {
 					//int levelTime = i *1000;
@@ -75,7 +75,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					Game.instance.getLevel().spawnEnemy(0, 330, null);
 					levelCounter++;
 					
-					wallet.addMoneyRound();
+				
+					
 				}
 				
 				g.drawString("LEVEL: " + levelCounter, 0, 450);
