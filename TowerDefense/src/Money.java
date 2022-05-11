@@ -11,6 +11,7 @@ private int roundend = 30; //you get 30 bucks at the end of each round
 int x = 925;
 int y = -45;
 int total; //initialize cost of money
+int max = 300;
 static int towerCost = 30;
 private Image img; 	
 private AffineTransform tx;
