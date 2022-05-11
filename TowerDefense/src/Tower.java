@@ -31,7 +31,7 @@ public abstract class Tower { //you can not instantiate Tower class
 	protected int cannonPosition;//the position of the cannon
 	
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
-	private int cannonPositionsMax = 25; //how many intermediate steps a cannon ball takes to hit
+	private int cannonPositionsMax; //how many intermediate steps a cannon ball takes to hit
 	
 	public Tower(String towerType, double cost, int damage, 
 			double range, double speed, 
@@ -47,6 +47,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		cannonPositionsMax = (int) (25/speed);
 		
 		rotation = (int)(360*Math.random()); //initial rotation
 		

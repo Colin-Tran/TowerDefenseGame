@@ -68,4 +68,7 @@ init(x, y);
 		return total;
 	}
 	
+	public void addMoneyRound() {
+		total = total + 20;
+	}
 }

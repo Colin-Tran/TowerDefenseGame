@@ -62,7 +62,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//next level
 				int numEnemy = Game.instance.getLevel().getMaxNumEnemies() -50;
 				
-				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size()< 1) {
+				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size() < 1) {
 					/*Game.instance.advanceLevel();
 				//	for(int i = 0; i < 5; i++) {
 					//int levelTime = i *1000;
@@ -75,7 +75,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					Game.instance.getLevel().spawnEnemy(0, 330, null);
 					levelCounter++;
 					
+				
+					
 				}
+				
 				g.drawString("LEVEL: " + levelCounter, 0, 450);
 				int counter = 0;
 				for(int i = 0; i < slimes.length; i++) {
@@ -89,7 +92,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Game.instance.advanceLevel();
 	
 		}
-		g.drawString("LEVEL: " + Game.instance.getLevel().toString(), 0, 450);
+	
 		g.drawString("Money: " + wallet.getTotal(), 1100, 450);
 
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
@@ -162,12 +165,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		
-	
-		
-		
-		
-		
-		
 	}
 		
 	private static SlimeEnemy[] convertToArray(ArrayList<SlimeEnemy> enemies) {
@@ -202,7 +199,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	private void initializeGame() {
 		Game.instance.getLevel().startEnemySpawning(); //level
-		components.addTower(new PelletTower(730, 220, 75, 75));
+		components.addTower(new SquirtTower(730, 220, 75, 75));
 		components.addTower(new PelletTower(230, 300, 75, 75));
 	}
 	
