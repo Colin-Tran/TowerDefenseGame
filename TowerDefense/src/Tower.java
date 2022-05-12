@@ -113,7 +113,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		
 		if(enemy != null) {//if the enemy exists continue shooting
 			if (cannonPosition == 0) {
-				Music sound = new Music("towernoises.wav", false);//play the sound when it shoots
+				Music sound = new Music("/imgs/towernoises.wav", false);//play the sound when it shoots
 				sound.play();
 				cannonPosition = cannonPositionsMax/5; //start a bit further than the middle of tower
 			} else if(cannonPosition < cannonPositionsMax) {
