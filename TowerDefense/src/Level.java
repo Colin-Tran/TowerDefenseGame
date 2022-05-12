@@ -1,5 +1,8 @@
+import java.util.Scanner;
 
 public class Level {
+
+	
 	private int mode; //the game mode: easy, med, hard
 	private int level; //1,2,3,etc. 
 	private int maxNumberOfEnemies; //each level has a number of enemies that get created
@@ -61,7 +64,16 @@ public class Level {
 			return new SlimeEnemy(0, 330);
 		}
 		//System.out.println("not spawning");
-		
+	/*	int counter = 0;
+		Scanner obj = new Scanner(System.in);
+		if(obj.hasNext("spawning")) {
+			counter++;
+		}
+		System.out.println(counter);*/
 		return null; //no more enemies can be spawn at this point
 	}
+
+	
+	
 }
+

@@ -12,6 +12,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,10 +22,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
 	Level lvl2 = new Level(2, 2);
+	
 	GameComponents components = new GameComponents();
 	Money wallet = new Money(100); //start out with 100 bucks
+	
+	
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
+		
+		
+		
+	//	System.out.println(str);
+		
 		
 		//get the components, based on the current Game mode and level
 		Background bg = components.getBackground();

@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.Random;
+import java.util.Scanner;
 
 public class SlimeEnemy {
 	private int width;
