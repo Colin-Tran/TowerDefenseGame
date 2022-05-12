@@ -38,7 +38,7 @@ public class SlimeEnemy {
 		//use your variables
 		width = 90;
 		height = 80;
-		health = 100;
+		health = 180;
 		sx = 0;
 		sy = 0;
 		hasEscaped = false;

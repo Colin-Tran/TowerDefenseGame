@@ -102,6 +102,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		return tempImage;
 	}
 	
+	//gets the center of the tower
 	protected Point getCenter() {
 		int centerX = (int)(x + width/2.0);
 		int centerY = (int)(y + height/2.0);	
@@ -128,6 +129,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		
 	}
 	
+	//rotates the cannon to the picked enemy
 	private void rotateCannon() {
 		if(enemy != null) {
 			Point towerCenter = getCenter();
