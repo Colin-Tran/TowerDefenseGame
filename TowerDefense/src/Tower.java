@@ -113,6 +113,8 @@ public abstract class Tower { //you can not instantiate Tower class
 		
 		if(enemy != null) {//if the enemy exists continue shooting
 			if (cannonPosition == 0) {
+				Music sound = new Music("towernoises.wav", false);//play the sound when it shoots
+				sound.play();
 				cannonPosition = cannonPositionsMax/5; //start a bit further than the middle of tower
 			} else if(cannonPosition < cannonPositionsMax) {
 				cannonPosition++; //move cannon ball closer to the enemy
@@ -131,7 +133,7 @@ public abstract class Tower { //you can not instantiate Tower class
 	
 	//rotates the cannon to the picked enemy
 	private void rotateCannon() {
-		if(enemy != null) {
+		if(enemy != null) {//if the enemy exists
 			Point towerCenter = getCenter();
 			Point enemyCenter = new Point(
 					enemy.getX()+width/2, enemy.getY() + height/2);
@@ -147,6 +149,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		}
 	}
 	
+	//returns an enemy with an input of a list of enemies the cannon should shoot at
 	private SlimeEnemy enemyToShootAt(ArrayList<SlimeEnemy> enemies) {
 		double rangeDistance = (range+1)*width;//range in pixels
 		Point towerCenter = getCenter();
@@ -163,11 +166,13 @@ public abstract class Tower { //you can not instantiate Tower class
 		return null;
 	}
 	
+	//calculate the distance between 2 points
 	private static double distance(Point p1, Point p2) {
 		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) +
 				Math.pow(p1.getY()-p2.getY(), 2));
 	}
 	
+	//calculate the angle between the 2 points
 	private static double angle(Point p1, Point p2) {
 		double deltaX = p1.getX()-p2.getX();
 		double deltaY = p1.getY()-p2.getY();

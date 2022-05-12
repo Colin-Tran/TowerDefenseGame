@@ -33,8 +33,8 @@ public class SlimeEnemy {
 		y = newY;
 		
 		
-		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); 
+		tx = AffineTransform.getTranslateInstance(x, y);
+		init(x, y);
 		//use your variables
 		width = 90;
 		height = 80;
