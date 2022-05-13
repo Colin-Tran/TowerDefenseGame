@@ -196,23 +196,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public static void main(String[] arg) {
 		Frame f = new Frame();
 		
+
 		Scanner sc = new Scanner("enemy.txt");
-		
-		int enemyNum = slimes.length;
-		 try {
-		      FileWriter myWriter = new FileWriter("enemy.txt");
-		      for(int i = 0; i < enemyNum; i++) {
-		      myWriter.write("Total Enemies:" + i);
-		      myWriter.close();	
-		      System.out.println("Successfully wrote to the file.");
-		      }
-		
-		      
-		    } catch (IOException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-		 
+	
 		 
 	}
 	
