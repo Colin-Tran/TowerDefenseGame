@@ -94,6 +94,10 @@ public class SlimeEnemy {
 	
 	public void removeHealth() {
 		health-= 10;
+		if(health == 0) {
+			Music sound = new Music("/imgs/slimedies.wav", false);
+			sound.play();
+		}
 	}
 	
 	public void moveRight () {
