@@ -125,6 +125,8 @@ public class SlimeEnemy {
 	}
 	
 	public void hasEscaped() {
+		Music sound = new Music("/imgs/slimeescapes.wav", false);
+		sound.play();
 		hasEscaped = true;
 	}
 	
