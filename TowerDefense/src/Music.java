@@ -1,15 +1,12 @@
-
-
 import java.io.File;
-import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Music  implements Runnable  {
@@ -21,25 +18,7 @@ public class Music  implements Runnable  {
     
 	public Music(String fileName, boolean loops) {
 		fn = fileName;
-		audioFile = new File(fileName);
-		try {
-			audioStream = AudioSystem.getAudioInputStream(audioFile);
-			AudioFormat format = audioStream.getFormat();
-	        DataLine.Info info = new DataLine.Info(Clip.class, format);
-	        audioClip = (Clip) AudioSystem.getLine(info);
-	        
-	        if(loops) {
-	        	audioClip.loop(audioClip.LOOP_CONTINUOUSLY);;
-	        }	        
-	        audioClip.open(audioStream);
-	        //audioClip.start();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		start2();
 	}
 	
 	public void play() {
@@ -55,7 +34,8 @@ public class Music  implements Runnable  {
 	     t.start ();
 	}
 	public void start2() {
-		audioFile = new File(fn);
+		Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+		audioFile= new File(path+"\\bin"+fn);
 		try {
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioFormat format = audioStream.getFormat();
