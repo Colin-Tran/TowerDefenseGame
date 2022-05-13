@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.io.File;  // Import the File class
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.FileWriter;
 
 public class Level {
-
 	
 	private int mode; //the game mode: easy, med, hard
 	private int level; //1,2,3,etc. 
@@ -13,6 +15,7 @@ public class Level {
 	private boolean isStarted; //if the playing at this level started yet
 	
 	private long lastSpawnTime; //time when the enemy was last spawned
+
 	
 	public Level(int mode, int level) {
 		this.mode = mode;
@@ -25,8 +28,7 @@ public class Level {
 		lastSpawnTime = 0;
 	}
 	
-	
-	
+
 	public void startEnemySpawning() {
 		if(!isStarted) {
 			startTime = System.currentTimeMillis();
@@ -70,6 +72,7 @@ public class Level {
 			counter++;
 		}
 		System.out.println(counter);*/
+		
 		return null; //no more enemies can be spawn at this point
 	}
 

@@ -4,7 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.MouseInfo;
-import java.awt.Rectangle;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -13,6 +13,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;  // Import the File class
+import java.io.FileWriter;
+import java.io.Writer;
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +26,7 @@ import javax.swing.Timer;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
-	SlimeEnemy[] slimes = new SlimeEnemy[0]; 
+	static SlimeEnemy[] slimes = new SlimeEnemy[0]; 
 	Level lvl2 = new Level(2, 2);
 	
 	GameComponents components = new GameComponents();
@@ -175,6 +181,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		
+		
 	}
 		
 	private static SlimeEnemy[] convertToArray(ArrayList<SlimeEnemy> enemies) {
@@ -185,8 +192,28 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		return array;
 	}
 	
+
 	public static void main(String[] arg) {
 		Frame f = new Frame();
+		
+		Scanner sc = new Scanner("enemy.txt");
+		
+		int enemyNum = slimes.length;
+		 try {
+		      FileWriter myWriter = new FileWriter("enemy.txt");
+		      for(int i = 0; i < enemyNum; i++) {
+		      myWriter.write("Total Enemies:" + i);
+		      myWriter.close();	
+		      System.out.println("Successfully wrote to the file.");
+		      }
+		
+		      
+		    } catch (IOException e) {
+		      System.out.println("An error occurred.");
+		      e.printStackTrace();
+		    }
+		 
+		 
 	}
 	
 	public Frame() {
