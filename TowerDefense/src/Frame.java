@@ -31,7 +31,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	GameComponents components = new GameComponents();
 	Money wallet = new Money(100); //start out with 100 bucks
-	
+	TowerDisplay display = new TowerDisplay(1040,100);
 	
 	
 	public void paint(Graphics g) {
@@ -181,7 +181,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		
-		
+		display.paint(g);
 	}
 		
 	private static SlimeEnemy[] convertToArray(ArrayList<SlimeEnemy> enemies) {

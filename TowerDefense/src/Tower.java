@@ -33,6 +33,8 @@ public abstract class Tower { //you can not instantiate Tower class
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
 	private int cannonPositionsMax; //how many intermediate steps a cannon ball takes to hit
 	
+	protected boolean displayRange;
+	
 	public Tower(String towerType, double cost, int damage, 
 			double range, double speed, 
 			int x, int y, int width, int height, 
@@ -195,8 +197,14 @@ public abstract class Tower { //you can not instantiate Tower class
 		return degrees;
 	}
 	
+	//to sety the new location of the tower
 	public void setLocation(int newX, int newY) {
 		x = newX;
 		y = newY;
+	}
+	
+	//if you want to see the range of the tower
+	public void setDisplayRange(boolean c) {
+		displayRange = c;
 	}
 }

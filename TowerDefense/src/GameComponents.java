@@ -26,6 +26,7 @@ public class GameComponents {
 		return towerTypes;
 	}
 	
+	//returns a list of towers
 	public ArrayList<Tower> getTowers() {
 		return towers;
 	}
