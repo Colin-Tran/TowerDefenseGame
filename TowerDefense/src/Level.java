@@ -9,14 +9,12 @@ public class Level {
 	private int level; //1,2,3,etc. 
 	private int maxNumberOfEnemies; //each level has a number of enemies that get created
 	private int durationInSeconds; //time for the level before it runs out
-	
 	private long startTime; //when the level gets started
 	private int enemyCounter; //number of enemies created
 	private boolean isStarted; //if the playing at this level started yet
-	
 	private long lastSpawnTime; //time when the enemy was last spawned
 
-	
+
 	public Level(int mode, int level) {
 		this.mode = mode;
 		this.level = level;
@@ -63,6 +61,17 @@ public class Level {
 			enemyCounter ++;
 			lastSpawnTime = System.currentTimeMillis();
 			System.out.println("spawning" + enemyCounter);
+			
+			File numberSpawned = new File("numEnemies.txt");
+			{
+			 try {
+				 FileWriter writer = new FileWriter(numberSpawned);
+				 writer.write(enemyCounter);
+				 writer.close();
+			    } catch(Exception e) {
+			        System.out.println("something is wrong with file!");
+			    }
+			}
 			return new SlimeEnemy(0, 330);
 		}
 		//System.out.println("not spawning");
