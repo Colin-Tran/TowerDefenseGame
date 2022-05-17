@@ -222,8 +222,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	private void initializeGame() {
 		Game.instance.getLevel().startEnemySpawning(); //level
-		components.addTower(new SquirtTower(730, 220, 75, 75));
-		components.addTower(new PelletTower(230, 300, 75, 75));
+		Tower tower1 = new PelletTower(230, 300, 75, 75);
+		Tower tower2 = new SquirtTower(730, 220, 75, 75);
+		tower1.setDisplayRange(true);
+		tower2.setDisplayRange(true);
+		components.addTower(tower1);
+		components.addTower(tower2);
 	}
 	
 	int tank = 0;

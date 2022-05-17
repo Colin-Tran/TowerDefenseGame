@@ -20,14 +20,15 @@ public class PelletTower extends Tower {
 
 	public void paint(Graphics g) {
 		
-		//draw the circle for the range
-		g.setColor(Color.GRAY);
-		g.drawOval((int) (x-range*width), (int) (y-range*height), 
+		//draw the circle for the range when the display range is set to true
+		if(displayRange) {
+			g.setColor(Color.GRAY);
+			g.drawOval((int) (x-range*width), (int) (y-range*height), 
 				(int) (width*(2*range+1)), (int) (height*(2*range+1)));
-		g.setColor(new Color(64,64,64,64));
-		g.fillOval((int) (x-range*width), (int) (y-range*height), 
+			g.setColor(new Color(64,64,64,64));
+			g.fillOval((int) (x-range*width), (int) (y-range*height), 
 				(int) (width*(2*range+1)), (int) (height*(2*range+1)));
-		
+		}
 		super.paint(g); //adds the image
 	
 	}
