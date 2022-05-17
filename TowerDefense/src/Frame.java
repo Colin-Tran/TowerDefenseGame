@@ -75,8 +75,20 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		int levelCounter = 1;
 		
+		//end game
+		if(Game.instance.getPlayer().getLives() <= 0) {
+			Color c = new Color(255, 255, 255);
+			g.setColor(c);
+			Font s = new Font("Serif", Font.BOLD, 30);
+			g.setFont(s);
+			g.drawString("GAME OVER", 600, 250);
+		}
+		
+		
+		//scanner for numEnemies
+	
+		
 		//next level
-				int numEnemy = Game.instance.getLevel().getMaxNumEnemies() -50;
 				
 				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size() < 1) {
 					/*Game.instance.advanceLevel();
@@ -85,12 +97,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				//}
 				
 				if(Game.instance.advanceLevel()) {*/
+				
 					
 					Game.instance.setLevel(lvl2);
 					Game.instance.getLevel().startEnemySpawning();
 					Game.instance.getLevel().spawnEnemy(0, 330, null);
 					levelCounter++;
-					
+		
 				
 					
 				}
@@ -115,6 +128,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		g.setColor(color);
 		Font stringFont = new Font( "SansSerif", Font.BOLD, 40 );
 		g.setFont(stringFont);
+		
 		
 		//movement
 		for(int i = 0; i < slimes.length; i++) { 
@@ -195,12 +209,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public static void main(String[] arg) {
 		Frame f = new Frame();
-		
 
-		Scanner sc = new Scanner("enemy.txt");
-	
+		
+    }
 		 
-	}
 	
 	public Frame() {
 		initializeGame();
