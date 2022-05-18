@@ -202,6 +202,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		display.paint(g);
+		
+		g.drawString("slimes: " + Game.instance.getLevel().getMaxNumEnemies(), 142, 445);
 	}
 		
 	private static SlimeEnemy[] convertToArray(ArrayList<SlimeEnemy> enemies) {
