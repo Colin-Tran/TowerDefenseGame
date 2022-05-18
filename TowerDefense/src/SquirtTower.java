@@ -6,7 +6,7 @@ public class SquirtTower extends Tower {
 	public SquirtTower(
 			int x, int y, int width, int height) {
 		
-		super ("Squirt Tower", 10, 2, 1, 2,
+		super ("Squirt Tower", 40, 2, 1, 2,
 		x,y,width, height, "/imgs/squirttower.png");
 	}
 
