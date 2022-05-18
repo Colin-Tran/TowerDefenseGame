@@ -4,11 +4,12 @@ public class GameComponents {
 	private ArrayList<Tower> towerTypes;
 	private ArrayList<Tower> towers;
 	private ArrayList<SlimeEnemy> enemies;
-	
+	public int moneyAdd;
 	public GameComponents() {
 		towers = new ArrayList<Tower>();
 		towerTypes = new ArrayList<Tower>();
 		enemies = new ArrayList<SlimeEnemy>();
+		moneyAdd = 0;
 	}
 	
 	public Background getBackground() {
@@ -46,6 +47,7 @@ public class GameComponents {
 			if(!enemies.get(i).isAlive()) {
 				enemies.remove(i);
 				i--;
+		moneyAdd +=5;
 			}
 		}
 		return enemies;

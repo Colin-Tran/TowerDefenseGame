@@ -30,7 +30,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	Level lvl2 = new Level(2, 2);
 	
 	GameComponents components = new GameComponents();
-	Money wallet = new Money(100); //start out with 100 bucks
+	Money wallet = new Money(60); //start out with 60 bucks
 	TowerDisplay display = new TowerDisplay(1025,100);
 	
 	
@@ -88,25 +88,31 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//scanner for numEnemies
 	
 		
-		//next level
-				
+		//next level	
+				boolean nxtLvlRdy = false;
 				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size() < 1) {
-					/*Game.instance.advanceLevel();
+					nxtLvlRdy = true;
 				//	for(int i = 0; i < 5; i++) {
 					//int levelTime = i *1000;
 				//}
 				
-				if(Game.instance.advanceLevel()) {*/
-				
-					
+				//if(Game.instance.advanceLevel()) {
 					Game.instance.setLevel(lvl2);
 					Game.instance.getLevel().startEnemySpawning();
 					Game.instance.getLevel().spawnEnemy(0, 330, null);
-					levelCounter++;
-		
-				
 					
+					if(nxtLvlRdy) {
+					/*for(int i = 0; i < 5; i++) {
+					Game.instance.setLevel(new Level(1, i));
+				}*/	
+			
+					levelCounter++;
+					nxtLvlRdy = false;
+					System.out.println(nxtLvlRdy);
+			//	}	
+					}
 				}
+				
 				
 				g.drawString("LEVEL: " + levelCounter, 0, 450);
 				int counter = 0;
@@ -214,7 +220,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
     }
 		 
 	
-	public Frame() {
+	public Frame() { 
 		initializeGame();
 
 		JFrame f = new JFrame("Tower Defense");
@@ -234,9 +240,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	private void initializeGame() {
 		Game.instance.getLevel().startEnemySpawning(); //level
-		Tower tower1 = new PelletTower(230, 300, 75, 75);
-		Tower tower2 = new SquirtTower(730, 220, 75, 75);
-		tower1.setDisplayRange(true);
+		Tower tower1 = new PelletTower(210, 300, 75, 75);
+		Tower tower2 = new SquirtTower(710, 220, 75, 75);
+				tower1.setDisplayRange(true);
 		tower2.setDisplayRange(true);
 		components.addTower(tower1);
 		components.addTower(tower2);
@@ -304,7 +310,25 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}
 			
 		}
-		if(arg0.getKeyCode() == 49) {
+		
+		switch(arg0.getKeyCode()) {
+		case 49:
+			
+			tank = 0;
+			
+			break;
+		case 50:
+			
+			tank = 1; 
+			
+			break;
+			
+		default:
+		
+			tank = 0;
+			
+		}
+		/*if(arg0.getKeyCode() == 49) {
 			tank = 0;
 		}else if(arg0.getKeyCode() == 50) {
 			tank = 1;
