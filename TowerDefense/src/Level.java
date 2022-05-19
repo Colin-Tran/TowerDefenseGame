@@ -37,6 +37,9 @@ public class Level {
 		durationInSeconds = durationS;
 	}
 	
+	public int returnLevel() {
+		return level;
+	}
 	public int remainingTimeinSeconds() {
 		int n = (int) (startTime/1000 + 
 				durationInSeconds - System.currentTimeMillis()/1000);
