@@ -86,11 +86,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		//scanner for numEnemies
-	
-		
+		levelCounter = 	Game.instance.getLevel().returnLevel();
+
 		//next level	
 				boolean nxtLvlRdy = false;
-				if(Game.instance.getPlayer().getLives() >= 1 && components.getEnemies(0, 330).size() < 1) {
+				if(Game.instance.getPlayer().getLives() > -1 && components.getEnemies(0, 330).size() == 0 ) {
 					nxtLvlRdy = true;
 				//	for(int i = 0; i < 5; i++) {
 					//int levelTime = i *1000;
@@ -100,7 +100,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					Game.instance.setLevel(lvl2);
 					Game.instance.getLevel().startEnemySpawning();
 					Game.instance.getLevel().spawnEnemy(0, 330, null);
-					
+				for(int i = 0; i < slimes.length; i++) {
+					slimes[i].multiplySpeed();	
+				}
 					if(nxtLvlRdy) {
 					/*for(int i = 0; i < 5; i++) {
 					Game.instance.setLevel(new Level(1, i));
@@ -111,12 +113,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			//	}	
 					}
 				}
-				//need to fix level counter ++
-				if(nxtLvlRdy) {
-					levelCounter +=1;
-					nxtLvlRdy = false;
-				}
-				
+		/*		//need to fix level counter ++
+				if(components.getEnemies(0, 0).size() == 0) {
+				levelCounter++;
+				nxtLvlRdy = false;
+				}*/
 				
 				g.drawString("LEVEL: " + levelCounter, 0, 450);
 				g.drawString("(enemies to kill: " + 
@@ -278,16 +279,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		for(Tower tower: components.getTowers()) {
-			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.pelTowerCost && tank == 0) {
+			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.pelTowerCost && tank == 0) {
 				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buyPelTower();
 				repaint();
 			}
-			if(arg0.getX() < 1500 && arg0.getY() < 1000 && wallet.getTotal() >= Money.squTowerCost && tank == 1) {
+			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.squTowerCost && tank == 1) {
 				components.getTowers().add(new SquirtTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buySquTower();
 				repaint();
 			}
+			
+	
 		}
 		
 	}
