@@ -33,6 +33,8 @@ public abstract class Tower { //you can not instantiate Tower class
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
 	private int cannonPositionsMax; //how many intermediate steps a cannon ball takes to hit
 	
+	protected boolean displayRange = true;
+	
 	public Tower(String towerType, double cost, int damage, 
 			double range, double speed, 
 			int x, int y, int width, int height, 
@@ -102,6 +104,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		return tempImage;
 	}
 	
+	//gets the center of the tower
 	protected Point getCenter() {
 		int centerX = (int)(x + width/2.0);
 		int centerY = (int)(y + height/2.0);	
@@ -112,6 +115,8 @@ public abstract class Tower { //you can not instantiate Tower class
 		
 		if(enemy != null) {//if the enemy exists continue shooting
 			if (cannonPosition == 0) {
+			//	Music sound = new Music("/imgs/towernoises.wav", false);//play the sound when it shoots
+			//	sound.play();
 				cannonPosition = cannonPositionsMax/5; //start a bit further than the middle of tower
 			} else if(cannonPosition < cannonPositionsMax) {
 				cannonPosition++; //move cannon ball closer to the enemy
@@ -128,8 +133,9 @@ public abstract class Tower { //you can not instantiate Tower class
 		
 	}
 	
+	//rotates the cannon to the picked enemy
 	private void rotateCannon() {
-		if(enemy != null) {
+		if(enemy != null) {//if the enemy exists
 			Point towerCenter = getCenter();
 			Point enemyCenter = new Point(
 					enemy.getX()+width/2, enemy.getY() + height/2);
@@ -145,6 +151,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		}
 	}
 	
+	//returns an enemy with an input of a list of enemies the cannon should shoot at
 	private SlimeEnemy enemyToShootAt(ArrayList<SlimeEnemy> enemies) {
 		double rangeDistance = (range+1)*width;//range in pixels
 		Point towerCenter = getCenter();
@@ -161,11 +168,13 @@ public abstract class Tower { //you can not instantiate Tower class
 		return null;
 	}
 	
+	//calculate the distance between 2 points
 	private static double distance(Point p1, Point p2) {
 		return Math.sqrt(Math.pow(p1.getX()-p2.getX(), 2) +
 				Math.pow(p1.getY()-p2.getY(), 2));
 	}
 	
+	//calculate the angle between the 2 points
 	private static double angle(Point p1, Point p2) {
 		double deltaX = p1.getX()-p2.getX();
 		double deltaY = p1.getY()-p2.getY();
@@ -188,8 +197,25 @@ public abstract class Tower { //you can not instantiate Tower class
 		return degrees;
 	}
 	
+	//to sety the new location of the tower
 	public void setLocation(int newX, int newY) {
 		x = newX;
 		y = newY;
+	}
+	
+	//if you want to see the range of the tower
+	public void setDisplayRange(boolean c) {
+		displayRange = c;
+	}
+	
+	public String toString1() {
+		String type = towerType;
+		return "type = " + type + ", cost = " + cost;
+	}
+	
+	public String toString2() {
+		String type = towerType;
+		return "range = " + range +
+				", speed = " + speed;
 	}
 }

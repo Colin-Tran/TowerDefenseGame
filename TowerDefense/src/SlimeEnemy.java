@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.Random;
+import java.util.Scanner;
 
 public class SlimeEnemy {
 	private int width;
@@ -33,12 +34,12 @@ public class SlimeEnemy {
 		y = newY;
 		
 		
-		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); 
+		tx = AffineTransform.getTranslateInstance(x, y);
+		init(x, y);
 		//use your variables
 		width = 90;
 		height = 80;
-		health = 100;
+		health = 180;
 		sx = 0;
 		sy = 0;
 		hasEscaped = false;
@@ -93,6 +94,10 @@ public class SlimeEnemy {
 	
 	public void removeHealth() {
 		health-= 10;
+		if(health == 0) {
+			Music sound = new Music("/imgs/slimedies.wav", false);
+			sound.play();
+		}
 	}
 	
 	public void moveRight () {
@@ -120,6 +125,8 @@ public class SlimeEnemy {
 	}
 	
 	public void hasEscaped() {
+		Music sound = new Music("/imgs/slimeescapes.wav", false);
+		sound.play();
 		hasEscaped = true;
 	}
 	
