@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
-	
+	private int levelCounter = 1;
 	static SlimeEnemy[] slimes = new SlimeEnemy[0]; 
 	Level lvl2 = new Level(2, 2);
 	
@@ -73,7 +73,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 					}
 		
-		int levelCounter = 1;
+	
 		
 		//end game
 		if(Game.instance.getPlayer().getLives() <= 0) {
@@ -106,11 +106,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					Game.instance.setLevel(new Level(1, i));
 				}*/	
 			
-					levelCounter++;
-					nxtLvlRdy = false;
+					
 					System.out.println(nxtLvlRdy);
 			//	}	
 					}
+				}
+				//need to fix level counter ++
+				if(nxtLvlRdy) {
+					levelCounter +=1;
+					nxtLvlRdy = false;
 				}
 				
 				
