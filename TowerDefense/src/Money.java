@@ -72,7 +72,7 @@ init(x, y);
 		return total;
 	}
 	
-	public void addMoneyRound() {
-		total = total + 5;
+	public void addMoneyRound(int addMoney) {
+		total += addMoney;
 	}
 }

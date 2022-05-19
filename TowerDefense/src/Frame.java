@@ -85,9 +85,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		
-		//scanner for numEnemies
+		//counters for money and levels
 		levelCounter = 	Game.instance.getLevel().returnLevel();
-
+	int moneyCounter = Game.instance.getLevel().returnLevel() * 20;
+	
+	
+		
+		
 		//next level	
 				boolean nxtLvlRdy = false;
 				if(Game.instance.getPlayer().getLives() > -1 && components.getEnemies(0, 330).size() == 0 ) {
@@ -118,7 +122,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				levelCounter++;
 				nxtLvlRdy = false;
 				}*/
-				
+			if(nxtLvlRdy) {
+				wallet.addMoneyRound(moneyCounter);
+			}
 				g.drawString("LEVEL: " + levelCounter, 0, 450);
 				g.drawString("(enemies to kill: " + 
 						Game.instance.getLevel().getMaxNumEnemies() + ")", 144, 450);
@@ -129,7 +135,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 						counter++;
 					}
 				}
-		
+				
 		//move onto next level if all slimes are dead
 		if(counter >= slimes.length) {
 			Game.instance.advanceLevel();
