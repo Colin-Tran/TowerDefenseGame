@@ -5,10 +5,11 @@ This is TowerDefense game by: Robert Niciu, Colin Tran, and Sriman Rajamani.
 
 ## Premise
 
-Green slimes are invading our class to steal Mr. David's StudyCS source code. Defend Mr. David's holy grail of an AP CSA class with towers and strategic positioning. Pay for them with the holy Wolverine Bucks bestowed upon you.
+Slimes are invading our class to steal Mr. David's StudyCS source code. Defend Mr. David's holy grail of an AP CSA class with towers and strategic positioning. Pay for them with the holy Wolverine Bucks bestowed upon you.
 
 ## Controls
 Move mouse and click where you want to place towers. Press one or two to swap between towers. You start out with a 100 wolverine bucks and recieve more at the end of each round. Good Luck, Have Fun.
+
 ![image](https://user-images.githubusercontent.com/90793421/169584642-e869b59c-8e37-423c-9ea8-cc8c0cef7bc7.png)
 
 
