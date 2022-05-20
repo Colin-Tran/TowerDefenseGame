@@ -47,7 +47,7 @@ public class GameComponents {
 			if(!enemies.get(i).isAlive()) {
 				enemies.remove(i);
 				i--;
-		moneyAdd +=5;
+		
 			}
 		}
 		return enemies;

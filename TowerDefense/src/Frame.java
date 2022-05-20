@@ -86,15 +86,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.setFont(s);
 			g.drawString("GAME OVER, YOU HAVE ZERO LIVES LEFT", 200, 250);
 			
+			
 			components.getTowers().clear();
 		}
 		
 		
 		//counters for money and levels
+		 
 		levelCounter = 	Game.instance.getLevel().getLevelCounter();
 		int moneyCounter = 0 ;
-		
-	
+
 		//next level	
 				boolean nxtLvlRdy = false;
 				if(Game.instance.getPlayer().getLives() > -1 && components.getEnemies(0, 330).size() == 0 ) {
@@ -110,9 +111,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					//Game.instance.getLevel().startEnemySpawning();
 					//Game.instance.getLevel().spawnEnemy(0, 330, null);
 					
-				//for(int i = 0; i < slimes.length; i++) {
-					//slimes[i].multiplySpeed();	
-				//}
+			
 					if(nxtLvlRdy) {
 					/*for(int i = 0; i < 5; i++) {
 					Game.instance.setLevel(new Level(1, i));
@@ -124,6 +123,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					}
 					moneyCounter += 20;
 					moneyCounter += wallet.getTotal();
+				
 				}
 
 		/*		//need to fix level counter ++
@@ -150,10 +150,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//move onto next level if all slimes are dead
 		if(counter >= slimes.length && !Game.instance.isGameOver()) {
 			Game.instance.advanceLevel();
-	
-			for(int i = 0; i < slimes.length; i++) {
-				slimes[i].multiplySpeed();	
-			}
+			
 		}
 	
 		levelCounter = Game.instance.getLevel().getLevelCounter();
@@ -172,50 +169,54 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//movement
 		for(int i = 0; i < slimes.length; i++) { 
+				
+			int j = 1;
+			j += levelCounter;
+		
 			if(slimes[i].getX() <= 100 && slimes[i].getY() < 500) { //move right at beginning
-				slimes[i].moveRight();
+				slimes[i].moveRight(j, 0);
 			}
 			
 			//when passes first tile move up pathway
 			if (slimes[i].getX() < 200 && slimes[i].getX() > 105 && slimes[i].getY() <500) { 
-				slimes[i].moveUp();
+				slimes[i].moveUp(0, -j);
 			}
 			
 			//MOVE RIGHT PATHWAY
 			if(slimes[i].getY() < 130 && slimes[i].getX() < 300) {
-				slimes[i].moveRight();
+				slimes[i].moveRight(j, 0);
 			}
 			
 			//MOVE DOWN PATHWAY
 			if(slimes[i].getX() < 500 && slimes[i].getX() > 405 && slimes[i].getY() < 300) {
-				slimes[i].moveDown();
+				slimes[i].moveDown(0, j);
 			}
 				
 			//MOVE RIGHT PATHWAY MIDPOINT OF PATH
 			if(slimes[i].getX() < 500 && slimes[i].getX() > 400 && slimes[i].getY() >420) {
-				slimes[i].moveRight();
+				slimes[i].moveRight(j, 0);
 			}
 			
 			//MOVE UP PATH
 			if(slimes[i].getY() > 400 && slimes[i].getX() < 750 && slimes[i].getX() >610) {
-				slimes[i].moveUp();
+				slimes[i].moveUp(0, -j);
 			}
 			
 			//MOVE RIGHT PATH
 			if(slimes[i].getY() < 30 && slimes[i].getX() < 750 && slimes[i].getX() > 610) {
-				slimes[i].moveRight();
+				slimes[i].moveRight(j, 0);
 			}
 
 			//MOVE DOWN PATH
 			
 			if(slimes[i].getY() < 30 && slimes[i].getX() < 900 && slimes[i].getX() > 805) {
-				slimes[i].moveDown();
+				slimes[i].moveDown(0, j);
 			}
 			
 			//FINAL MOVE RIGHT
 			
 			if(slimes[i].getX() < 900 && slimes[i].getX() > 805 && slimes[i].getY() < 350 && slimes[i].getY() > 240) {
-				slimes[i].moveRight();
+				slimes[i].moveRight(j, 0);
 			}
 			
 			
