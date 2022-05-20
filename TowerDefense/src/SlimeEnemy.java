@@ -146,6 +146,11 @@ public class SlimeEnemy {
 		y = 350;
 	}
 	
+	public void multiplySpeed() {
+		sx *= 2;
+		sy *= 2;
+	}
+	
 }
 	
 
