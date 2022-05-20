@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class SlimeEnemy {
 	private int width;
 	private int height;
-	private int health;
+	protected int health;
 	private String fileName; 
 	private int sx;//slime x movement
 	private int sy;//slime y movement
@@ -20,8 +20,8 @@ public class SlimeEnemy {
 
 
 	//add location attributes
-	private Image img; 	
-	private AffineTransform tx;
+	protected Image img; 	
+	protected AffineTransform tx;
 	//scaling variables to easily change and try different scales later
 	private double scaleW=1.0, scaleH = 1.0; 
 	public int x, y;
@@ -69,12 +69,12 @@ public class SlimeEnemy {
 		
 	}
 	
-	private void init(double a, double b) {
+	protected void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
 
-	private Image getImage(String path) {
+	protected Image getImage(String path) {
 		Image tempImage = null;
 		try {
 			URL imageURL = Background.class.getResource(path);

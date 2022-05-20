@@ -48,7 +48,12 @@ public class Level {
 			        System.out.println("something is wrong with file!");
 			    }
 			}
-			return new SlimeEnemy(0, 330);
+			if(level == 1) {
+				return new SlimeEnemy(0, 330);
+			}else {
+				return new SuperSlimeEnemy(0, 330);
+			}
+		
 		}
 		//System.out.println("not spawning");
 	/*	int counter = 0;
