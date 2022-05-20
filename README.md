@@ -1,6 +1,7 @@
 # TowerDefenseGame
 
 This is TowerDefense game by: Robert Niciu, Colin Tran, and Sriman Rajamani. 
+![image](https://user-images.githubusercontent.com/90793421/169584701-1f840583-a68b-414a-a2f8-bb35e1157727.png)
 
 ## Premise
 
@@ -8,6 +9,8 @@ Green slimes are invading our class to steal Mr. David's StudyCS source code. De
 
 ## Controls
 Move mouse and click where you want to place towers. Press one or two to swap between towers. You start out with a 100 wolverine bucks and recieve more at the end of each round. Good Luck, Have Fun.
+![image](https://user-images.githubusercontent.com/90793421/169584642-e869b59c-8e37-423c-9ea8-cc8c0cef7bc7.png)
+
 
 ## How to Run
 Since we have not learned how to compile files into .exe or .jar files, please clone this repository into an ide of your choice and run. If an ide is not avaiable, or you don't want to use one, then install jdk, preferrably the latest one, download and extract the repo, cd into the extracted folder with a command prompt of your choice, run "javac Frame.java" then run "java Frame.java".
