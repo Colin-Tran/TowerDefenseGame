@@ -45,7 +45,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//get the components, based on the current Game mode and level
 		Background bg = components.getBackground();
 		
-		ArrayList<SlimeEnemy> enemies = components.getEnemies(0, 330);
+		ArrayList<SlimeEnemy> enemies = new ArrayList<SlimeEnemy>();
+		if (!Game.instance.isGameOver()) {
+			enemies = components.getEnemies(0, 330); //will spawn enemies
+		}
 		slimes = convertToArray(enemies);
 		bg.paint(g);
 		g.setColor(Color.orange);
@@ -68,20 +71,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(Game.instance.getPlayer().getLives() < 0) {
 			for(int i = 0; i <slimes.length; i++) {
 				slimes[i].resetStop();
-				components.getTowers().remove(i);
 			}
-		
-					}
+			
+			//components.getTowers().clear();
+		}
 		
 		int levelCounter = 1;
 		
 		//end game
-		if(Game.instance.getPlayer().getLives() <= 0) {
+		if(Game.instance.isGameOver()) {
 			Color c = new Color(255, 255, 255);
 			g.setColor(c);
 			Font s = new Font("Serif", Font.BOLD, 30);
 			g.setFont(s);
-			g.drawString("GAME OVER", 600, 250);
+			g.drawString("GAME OVER, YOU HAVE ZERO LIVES LEFT", 200, 250);
+			
+			components.getTowers().clear();
 		}
 		
 		
@@ -97,9 +102,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				//}
 				
 				//if(Game.instance.advanceLevel()) {
-					Game.instance.setLevel(lvl2);
-					Game.instance.getLevel().startEnemySpawning();
-					Game.instance.getLevel().spawnEnemy(0, 330, null);
+					//Game.instance.setLevel(lvl2);
+					//Game.instance.advanceLevel();
+					//Game.instance.getLevel().startEnemySpawning();
+					//Game.instance.getLevel().spawnEnemy(0, 330, null);
 					
 					if(nxtLvlRdy) {
 					/*for(int i = 0; i < 5; i++) {
@@ -113,23 +119,24 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					}
 				}
 				
-				
-				g.drawString("LEVEL: " + levelCounter, 0, 450);
-				g.drawString("(enemies to kill: " + 
-						Game.instance.getLevel().getMaxNumEnemies() + ")", 144, 450);
-				
-				int counter = 0;
-				for(int i = 0; i < slimes.length; i++) {
-					if(slimes[i].isAlive() == false) {
-						counter++;
-					}
-				}
+		int counter = 0;
+		for(int i = 0; i < slimes.length; i++) {
+			if(slimes[i].isAlive() == false) {
+				counter++;
+			}
+		}
 		
 		//move onto next level if all slimes are dead
-		if(counter >= slimes.length) {
+		if(counter >= slimes.length && !Game.instance.isGameOver()) {
 			Game.instance.advanceLevel();
 	
 		}
+	
+		levelCounter = Game.instance.getLevel().getLevelCounter();
+		g.drawString("LEVEL: " + levelCounter, 0, 450);
+		g.drawString("(enemies to kill: " + 
+				Game.instance.getLevel().getMaxNumEnemies() + ")", 144, 450);
+		
 	
 		g.drawString("Money: " + wallet.getTotal(), 1100, 450);
 
@@ -242,7 +249,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	}
 	private void initializeGame() {
-		Game.instance.getLevel().startEnemySpawning(); //level
+		//Game.instance.getLevel().startEnemySpawning(); //level
 		Tower tower1 = new PelletTower(210, 300, 75, 75);
 		Tower tower2 = new SquirtTower(710, 220, 75, 75);
 				tower1.setDisplayRange(true);
