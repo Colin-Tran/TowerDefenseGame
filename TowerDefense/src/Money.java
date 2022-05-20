@@ -75,4 +75,8 @@ init(x, y);
 	public void addMoneyRound(int addMoney) {
 		total += addMoney;
 	}
+	
+	public void setMoney(int setMoney) {
+		total = setMoney;
+	}
 }

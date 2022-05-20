@@ -92,7 +92,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//counters for money and levels
 		levelCounter = 	Game.instance.getLevel().getLevelCounter();
-		int moneyCounter = Game.instance.getLevel().getLevelCounter() * 20;
+		int moneyCounter = 0 ;
+		
 	
 		//next level	
 				boolean nxtLvlRdy = false;
@@ -121,6 +122,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					System.out.println(nxtLvlRdy);
 			//	}	
 					}
+					moneyCounter += 20;
+					moneyCounter += wallet.getTotal();
 				}
 
 		/*		//need to fix level counter ++
@@ -129,7 +132,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				nxtLvlRdy = false;
 				}*/
 			if(nxtLvlRdy) {
-				wallet.addMoneyRound(moneyCounter);
+				wallet.setMoney(moneyCounter);
+				nxtLvlRdy = false;
 			}
 			
 		g.drawString("LEVEL: " + levelCounter, 0, 450);
