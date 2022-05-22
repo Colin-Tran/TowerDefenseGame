@@ -135,11 +135,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				wallet.setMoney(moneyCounter);
 				nxtLvlRdy = false;
 			}
-			
-		g.drawString("LEVEL: " + levelCounter, 0, 450);
-		g.drawString("(enemies to kill: " + 
-				Game.instance.getLevel().getMaxNumEnemies() + ")", 144, 450);
-				
+					
 		int counter = 0;
 		for(int i = 0; i < slimes.length; i++) {
 			if(slimes[i].isAlive() == false) {
