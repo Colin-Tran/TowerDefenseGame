@@ -5,7 +5,7 @@ public class SuperSlimeEnemy extends SlimeEnemy {
 	public SuperSlimeEnemy(int x, int y) {
 		super(x, y);
 		img = getImage("/imgs/madslime.gif");
-		health = 300;
+		setHealth(250);
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x,y);
 	}

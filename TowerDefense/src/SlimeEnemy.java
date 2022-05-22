@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class SlimeEnemy {
 	private int width;
 	private int height;
-	protected int health;
+	private int health;
+	private int initialHealth;
 	private String fileName; 
 	private int sx;//slime x movement
 	private int sy;//slime y movement
@@ -40,9 +41,11 @@ public class SlimeEnemy {
 		width = 90;
 		height = 80;
 		health = 180;
+		initialHealth = 180;
 		sx = 0;
 		sy = 0;
 		hasEscaped = false;
+		
 	}
 	
 	
@@ -56,7 +59,7 @@ public class SlimeEnemy {
 			update();
 			g2.drawImage(img, tx, null);
 			g.setColor(Color.green);
-			g.fillRect(x, y+30, health, 10);
+			g.fillRect(x, y+30, (int)(width*((double)health/initialHealth)), 10);
 		}
 	}
 	
@@ -158,7 +161,10 @@ public class SlimeEnemy {
 		y = 350;
 	}
 	
-	
+	public void setHealth(int amount) {
+		health = amount;
+		initialHealth = amount;
+	}
 	
 	//trying to use this for movement
 /*	public void setSpeed(int moveX, int moveY) {

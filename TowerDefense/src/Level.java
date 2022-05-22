@@ -9,16 +9,14 @@ public class Level {
 	private int level; //1,2,3,etc. 
 	private int maxNumberOfEnemies; //each level has a number of enemies that get created
 	private int enemyCounter; //number of enemies created
-	private boolean isStarted; //if the playing at this level started yet
 	private long lastSpawnTime; //time when the enemy was last spawned
 
 
 	public Level(int mode, int level) {
 		this.mode = mode;
 		this.level = level;
-		maxNumberOfEnemies = 10 * level;	
+		maxNumberOfEnemies = 5 + 5 * level;	
 		enemyCounter = 0;
-		isStarted = false;
 		lastSpawnTime = 0;
 	}
 	
@@ -32,7 +30,7 @@ public class Level {
 	
 	public SlimeEnemy spawnEnemy(int x, int y, Object enemyPath)  {
 		if (enemyCounter < maxNumberOfEnemies &&
-				secondsSinceLastSpawn() > 2) {//wait 2 seconds between spawning a new enemy
+				secondsSinceLastSpawn() > 1.5) {//wait 2 seconds between spawning a new enemy
 			
 			enemyCounter ++;
 			lastSpawnTime = System.currentTimeMillis();
@@ -50,6 +48,12 @@ public class Level {
 			}
 			if(level == 1) {
 				return new SlimeEnemy(0, 330);
+			}else if(level == 2) {
+				if(enemyCounter%2 == 0)	{
+					return new SuperSlimeEnemy(0, 330);
+				}else {
+					return new SlimeEnemy(0, 330);
+				}
 			}else {
 				return new SuperSlimeEnemy(0, 330);
 			}
