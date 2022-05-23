@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 
-=======
-
->>>>>>> branch 'Develop' of https://github.com/Colin-Tran/TowerDefenseGame.git
