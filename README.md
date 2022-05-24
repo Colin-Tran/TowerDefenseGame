@@ -43,5 +43,3 @@ What is the ESRB rating on this game?
 How can I support the creators?
 > We don't have a common crypto wallet address, so just email Mr. David to give us an A.
 
-
-## NOTE FOR LATER ON TO MERGE MAIN WITH OTHER BRANCHES, USE REQUESTS
