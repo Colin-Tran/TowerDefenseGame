@@ -100,7 +100,7 @@ public class SlimeEnemy {
 		if(health == 0) {
 			Music sound = new Music("/imgs/slimedies.wav", false);
 			sound.play();
-			Game.instance.getPlayer().increaseScore(10);
+			Game.instance.getPlayer().increaseScore(1);
 		}
 	}
 	

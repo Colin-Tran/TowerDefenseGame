@@ -67,7 +67,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		wallet.paint(g);
 		
 		g.drawString("Lives = " + Game.instance.getPlayer().getLives(), 50, 50);
-		g.drawString("score = " + Game.instance.getPlayer().getScore(), 190, 50);
+		g.drawString("Score (enemies killed) = " + Game.instance.getPlayer().getScore(), 250, 50);
 		//game over
 		if(Game.instance.getPlayer().getLives() < 0) {
 			for(int i = 0; i <slimes.length; i++) {
