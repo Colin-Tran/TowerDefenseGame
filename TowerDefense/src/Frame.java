@@ -122,7 +122,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 					System.out.println(nxtLvlRdy);
 			//	}	
 					}
-					moneyCounter += 20;
+					moneyCounter += 30;
 					moneyCounter += wallet.getTotal();
 				
 				}
