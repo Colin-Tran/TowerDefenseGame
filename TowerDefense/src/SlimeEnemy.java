@@ -108,31 +108,25 @@ public class SlimeEnemy {
 		sx = speedX;
 		sy = speedY;
 		
-	//	sx = 2;
-	//	sy = 0;
+	
 	}
 	public void moveLeft(int speedX, int speedY) {
 		sx = speedX;
 		sy = speedY;
 		
-	//	sx = -2;
-		//sy = 0;
+	
 	}
 	
 	public void moveUp(int speedX, int speedY) {
 		sx = speedX;
 		sy = speedY;
 		
-		//sx = 0;
-	//	sy = -2;
 	}
 	
 	public void moveDown(int speedX, int speedY) {
 		sx = speedX;
 		sy = speedY;
 		
-		//sx = 0;
-		//sy = 2;
 	}
 	
 	public void reset() {
@@ -167,26 +161,7 @@ public class SlimeEnemy {
 		initialHealth = amount;
 	}
 	
-	//trying to use this for movement
-/*	public void setSpeed(int moveX, int moveY) {
-		sx = moveX;
-		sy *= moveY;
-	}
-	public void setSpeedX(int moveX) {
-		sx = moveX;
-	}
-	public void setSpeedY( int moveY) {
-		sy *= moveY;
-	}
 	
-	public void multiplySpeedX(int multiplier) {
-		sx *= multiplier;
-	}
-	
-	public void multiplySpeedY(int multiplier) {
-		sy *= multiplier;
-	}
-	*/
 }
 	
 

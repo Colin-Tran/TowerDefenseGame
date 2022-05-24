@@ -7,7 +7,6 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Money {
-private int roundend = 30; //you get 30 bucks at the end of each round
 int x = 925;
 int y = -45;
 int total; //initialize cost of money
@@ -18,7 +17,7 @@ private Image img;
 private AffineTransform tx;
 
 public Money(int ncost) {
-	img = getImage("/imgs/wolverine bucks.png"); //load the image for Tree
+	img = getImage("/imgs/wolverine bucks.png"); //load the image for money
 total = ncost;
 
 
