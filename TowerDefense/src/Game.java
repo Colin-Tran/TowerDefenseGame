@@ -32,6 +32,8 @@ public class Game {
 	}
 	
 	public boolean advanceLevel() {
+		levelNumber++;
+		level = new Level(mode, levelNumber);
 		return true;
 		
 	}

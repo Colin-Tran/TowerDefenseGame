@@ -12,6 +12,7 @@ public class SlimeEnemy {
 	private int width;
 	private int height;
 	private int health;
+	private int initialHealth;
 	private String fileName; 
 	private int sx;//slime x movement
 	private int sy;//slime y movement
@@ -20,8 +21,8 @@ public class SlimeEnemy {
 
 
 	//add location attributes
-	private Image img; 	
-	private AffineTransform tx;
+	protected Image img; 	
+	protected AffineTransform tx;
 	//scaling variables to easily change and try different scales later
 	private double scaleW=1.0, scaleH = 1.0; 
 	public int x, y;
@@ -40,9 +41,11 @@ public class SlimeEnemy {
 		width = 90;
 		height = 80;
 		health = 180;
+		initialHealth = 180;
 		sx = 0;
 		sy = 0;
 		hasEscaped = false;
+		
 	}
 	
 	
@@ -56,7 +59,7 @@ public class SlimeEnemy {
 			update();
 			g2.drawImage(img, tx, null);
 			g.setColor(Color.green);
-			g.fillRect(x, y+30, health, 10);
+			g.fillRect(x, y+30, (int)(width*((double)health/initialHealth)), 10);
 		}
 	}
 	
@@ -69,12 +72,12 @@ public class SlimeEnemy {
 		
 	}
 	
-	private void init(double a, double b) {
+	protected void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(1, 1);
 	}
 
-	private Image getImage(String path) {
+	protected Image getImage(String path) {
 		Image tempImage = null;
 		try {
 			URL imageURL = Background.class.getResource(path);
@@ -97,26 +100,39 @@ public class SlimeEnemy {
 		if(health == 0) {
 			Music sound = new Music("/imgs/slimedies.wav", false);
 			sound.play();
+			Game.instance.getPlayer().increaseScore(1);
 		}
 	}
 	
-	public void moveRight () {
-		sx = 2;
-		sy = 0;
+	public void moveRight (int speedX, int speedY) {
+		sx = speedX;
+		sy = speedY;
+		
+	//	sx = 2;
+	//	sy = 0;
 	}
-	public void moveLeft() {
-		sx = -2;
-		sy = 0;
+	public void moveLeft(int speedX, int speedY) {
+		sx = speedX;
+		sy = speedY;
+		
+	//	sx = -2;
+		//sy = 0;
 	}
 	
-	public void moveUp() {
-		sx = 0;
-		sy = -2;
+	public void moveUp(int speedX, int speedY) {
+		sx = speedX;
+		sy = speedY;
+		
+		//sx = 0;
+	//	sy = -2;
 	}
 	
-	public void moveDown() {
-		sx = 0;
-		sy = 2;
+	public void moveDown(int speedX, int speedY) {
+		sx = speedX;
+		sy = speedY;
+		
+		//sx = 0;
+		//sy = 2;
 	}
 	
 	public void reset() {
@@ -146,6 +162,31 @@ public class SlimeEnemy {
 		y = 350;
 	}
 	
+	public void setHealth(int amount) {
+		health = amount;
+		initialHealth = amount;
+	}
+	
+	//trying to use this for movement
+/*	public void setSpeed(int moveX, int moveY) {
+		sx = moveX;
+		sy *= moveY;
+	}
+	public void setSpeedX(int moveX) {
+		sx = moveX;
+	}
+	public void setSpeedY( int moveY) {
+		sy *= moveY;
+	}
+	
+	public void multiplySpeedX(int multiplier) {
+		sx *= multiplier;
+	}
+	
+	public void multiplySpeedY(int multiplier) {
+		sy *= multiplier;
+	}
+	*/
 }
 	
 
