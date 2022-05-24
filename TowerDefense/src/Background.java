@@ -43,7 +43,6 @@ public class Background{
 		
 		
 	}
-	//original pixel size = 400x245
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(2, 2);

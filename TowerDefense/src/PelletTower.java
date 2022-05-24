@@ -10,6 +10,7 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class PelletTower extends Tower {
+	//extending the original tower class and reusing the logic there
 	
 	public PelletTower(
 			int x, int y, int width, int height) {
@@ -21,6 +22,7 @@ public class PelletTower extends Tower {
 	public void paint(Graphics g) {
 
 		//draw the circle for the range when the display range is set to true
+		//and changing the display range for this specific tower 
 		if(displayRange) {
 			g.setColor(Color.GRAY);
 			g.drawOval((int) (x-range*width), (int) (y-range*height), 
@@ -29,6 +31,7 @@ public class PelletTower extends Tower {
 			g.fillOval((int) (x-range*width), (int) (y-range*height), 
 				(int) (width*(2*range+1)), (int) (height*(2*range+1)));
 		}
+		
 		super.paint(g); //adds the image
 	
 	}

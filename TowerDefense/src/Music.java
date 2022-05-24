@@ -16,6 +16,7 @@ public class Music  implements Runnable  {
     private Clip audioClip;
     private String fn;
     
+    //CREATED MUSIC CLASS TO ADD SOUND TO SPECIFIC ACTIONS WITHIN THE GAME
 	public Music(String fileName, boolean loops) {
 		fn = fileName;
 		start2();
@@ -29,6 +30,8 @@ public class Music  implements Runnable  {
 	     start2();
 	     t.start ();
 	}
+	
+	//START PLAYING THE DIFFERNT SOUNDS
 	public void start() {
 	     t = new Thread (this, fn);
 	     t.start ();
@@ -43,6 +46,9 @@ public class Music  implements Runnable  {
 	        audioClip = (Clip) AudioSystem.getLine(info);
 	        audioClip.open(audioStream);
 	        audioClip.start();
+	        
+	        //catching any potential error exceptions
+	        
 		} catch (UnsupportedAudioFileException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
