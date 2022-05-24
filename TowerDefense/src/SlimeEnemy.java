@@ -9,8 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class SlimeEnemy {
-	private int width;
-	
+	private int width; // the width is used for the health bar
 	private int health;
 	private int initialHealth;
 	private String fileName; 
@@ -23,6 +22,8 @@ public class SlimeEnemy {
 	//add location attributes
 	protected Image img; 	
 	protected AffineTransform tx;
+	//scaling variables to easily change and try different scales later
+		private double scaleW=1.0, scaleH = 1.0; 
 	public int x, y;
 	
 	public SlimeEnemy(int newX, int newY) {
@@ -36,7 +37,8 @@ public class SlimeEnemy {
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y);
 		//use your variables
-		
+		width = 90;
+	
 		health = 180;
 		initialHealth = 180;
 		sx = 0;
