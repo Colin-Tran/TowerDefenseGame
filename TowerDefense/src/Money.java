@@ -17,7 +17,7 @@ private Image img;
 private AffineTransform tx;
 
 public Money(int ncost) {
-	img = getImage("/imgs/wolverine bucks.png"); //load the image for money
+	img = getImage("/imgs/wolverine bucks.png"); //load the image for money (wolverine buck)
 total = ncost;
 
 
@@ -61,20 +61,22 @@ init(x, y);
 
 	
 }
+	//method to buy the Pellet Tower Variant as well as remove the specific cost from the total balance
 	public void buyPelTower() {
 		total -= pelTowerCost; //cost of tower is 50
 	}
+	
+	//method to buy the Squirt Tower Variant as well as remove the specific cost from the total balance
 	public void buySquTower() {
 		total -= squTowerCost; //cost of tower is 50
 	}
+	
+	//returning the total amount of money left 
 	public int getTotal() {
 		return total;
 	}
 	
-	public void addMoneyRound(int addMoney) {
-		total += addMoney;
-	}
-	
+	//Logic to help add money after a round ends
 	public void setMoney(int setMoney) {
 		total = setMoney;
 	}
