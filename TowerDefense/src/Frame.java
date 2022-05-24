@@ -69,6 +69,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		wallet.paint(g);
 		
 		//displaying lives and the score
+		g.setColor(Color.orange);
 		g.drawString("Lives = " + Game.instance.getPlayer().getLives(), 50, 50);
 		g.drawString("Score (enemies killed) = " + Game.instance.getPlayer().getScore(), 250, 50);
 		
