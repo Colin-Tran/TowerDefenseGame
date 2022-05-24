@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class SlimeEnemy {
 	private int width;
-	private int height;
+	
 	private int health;
 	private int initialHealth;
 	private String fileName; 
@@ -23,8 +23,6 @@ public class SlimeEnemy {
 	//add location attributes
 	protected Image img; 	
 	protected AffineTransform tx;
-	//scaling variables to easily change and try different scales later
-	private double scaleW=1.0, scaleH = 1.0; 
 	public int x, y;
 	
 	public SlimeEnemy(int newX, int newY) {
@@ -38,8 +36,7 @@ public class SlimeEnemy {
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y);
 		//use your variables
-		width = 90;
-		height = 80;
+		
 		health = 180;
 		initialHealth = 180;
 		sx = 0;
@@ -95,6 +92,7 @@ public class SlimeEnemy {
 		return y;
 	}
 	
+	//if tower hits slime this method is called to remove health from the slime
 	public void removeHealth() {
 		health-= 10;
 		if(health == 0) {
@@ -104,6 +102,7 @@ public class SlimeEnemy {
 		}
 	}
 	
+	//ALL MOVEMENT METHODS FOR EACH SLIME
 	public void moveRight (int speedX, int speedY) {
 		sx = speedX;
 		sy = speedY;
@@ -129,17 +128,21 @@ public class SlimeEnemy {
 		
 	}
 	
+	
+	//RESET THE SLIME TO THE STARTING POSITION
 	public void reset() {
 		x = -100;
 		y = 350;
 	}
 	
+	//setting the boolean hasEscaped to true so that we can use this var for logic
 	public void hasEscaped() {
 		Music sound = new Music("/imgs/slimeescapes.wav", false);
 		sound.play();
 		hasEscaped = true;
 	}
 	
+	//checking if the slime is alive and isn't outside the borders of the game
 	public boolean isAlive() {
 		return !hasEscaped && health >0;
 	}
@@ -156,6 +159,7 @@ public class SlimeEnemy {
 		y = 350;
 	}
 	
+	//setter for slime enemy health
 	public void setHealth(int amount) {
 		health = amount;
 		initialHealth = amount;

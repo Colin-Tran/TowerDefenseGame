@@ -39,10 +39,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		super.paintComponent(g);
 		
 		
-		
-	//	System.out.println(str);
-		
-		
 		//get the components, based on the current Game mode and level
 		Background bg = components.getBackground();
 		
