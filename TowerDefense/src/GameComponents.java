@@ -1,30 +1,20 @@
 import java.util.ArrayList;
 public class GameComponents {
 	private Background background;
-	private ArrayList<Tower> towerTypes;
 	private ArrayList<Tower> towers;
 	private ArrayList<SlimeEnemy> enemies;
-	public int moneyAdd;
+	
 	public GameComponents() {
 		towers = new ArrayList<Tower>();
-		towerTypes = new ArrayList<Tower>();
 		enemies = new ArrayList<SlimeEnemy>();
-		moneyAdd = 0;
 	}
 	
+	//used for getting the background of the game
 	public Background getBackground() {
 		if(background == null) {
 			background = new Background(0, 0);
 		}
 		return background;
-	}
-	
-	public ArrayList<Tower> getTowerTypes(int x, int y, int w, int h) {
-		if(towerTypes.size() == 0) {
-			towerTypes.add(new PelletTower(x, y, w, h));
-			//towerTypes.add(new PelletTower(x+w, y, w, h));
-		}
-		return towerTypes;
 	}
 	
 	//returns a list of towers
@@ -36,6 +26,7 @@ public class GameComponents {
 		towers.add(tower);
 	}
 	
+	//gets a list of enemies
 	public ArrayList<SlimeEnemy> getEnemies(int x, int y) {
 		SlimeEnemy temp = Game.instance.getLevel().spawnEnemy(x, y, null);
 		if(temp != null) {

@@ -27,7 +27,7 @@ import javax.swing.Timer;
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	private int levelCounter = 1;
 	static SlimeEnemy[] slimes = new SlimeEnemy[0]; 
-	Level lvl2 = new Level(2, 2);
+	Level lvl2 = new Level(2);
 	
 	GameComponents components = new GameComponents();
 	Money wallet = new Money(60); //start out with 60 bucks
