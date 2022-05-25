@@ -25,24 +25,17 @@ public class Background{
 		//these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
 		//call update to update the actually picture location
 		update();
 		
-		
-		
-		
 		g2.drawImage(img, tx, null);
-		
-		
-
 	}
+	
 	/* update the picture variable location */
 	private void update() {
-
-		
 		
 	}
+	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(2, 2);
@@ -58,5 +51,4 @@ public class Background{
 		}
 		return tempImage;
 	}
-
 }
