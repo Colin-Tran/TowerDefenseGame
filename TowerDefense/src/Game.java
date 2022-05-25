@@ -27,7 +27,6 @@ public class Game {
 		
 	}
 	
-	
 	public boolean isGameOver() {
 		if(player.getLives() <= 0 ) {
 			return true;

@@ -32,7 +32,7 @@ public abstract class Tower { //you can not instantiate Tower class
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
 	private int cannonPositionsMax; //how many intermediate steps a cannon ball takes to hit
 	
-	protected boolean displayRange = true; //if you want gthe tower to display the range
+	protected boolean displayRange = true; //if you want the tower to display the range
 	
 	public Tower(String towerType, double cost,
 			double range, double speed, 
@@ -60,6 +60,7 @@ public abstract class Tower { //you can not instantiate Tower class
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawRect(x, y, width, height); //shows the borders of the tower
 		g2.drawImage(img, tx, null);
+		
 		if(cannonPosition > 0) { //used for drawing the cannon ball
 			g.setColor(Color.black);
 			Point enemyCenter = new Point(
@@ -144,8 +145,6 @@ public abstract class Tower { //you can not instantiate Tower class
 				//System.out.println("rotation = " + rotation + 
 			     //		"; enemy Center = " + enemyCenter);
 			}
-			
-			
 		}
 	}
 	

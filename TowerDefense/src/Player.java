@@ -1,7 +1,8 @@
 
 public class Player {
-	private int lives;
-	private int score;
+	private int lives;//how many lives a player has at the beginning and during the game. 
+	private int score;//how many enemies are killed
+	
 	public Player() {
 		lives = 20;
 		score = 0;

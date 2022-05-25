@@ -1,6 +1,7 @@
 import java.io.File;  // Import the File class
 import java.io.FileWriter;
 
+//holds information about the level and special behavior per level
 public class Level {
 	
 	private int level; //1,2,3,etc. 
@@ -46,6 +47,7 @@ public class Level {
 			
 			File numberSpawned = new File("numEnemies.txt");
 			writeFile(numberSpawned);
+			
 			if(level == 1) {
 				return new SlimeEnemy(0, 330);
 			}else if(level == 2) {
@@ -65,8 +67,5 @@ public class Level {
 	public int getLevelCounter() {
 		return level;
 	}
-	
-	
-	
 }
 
