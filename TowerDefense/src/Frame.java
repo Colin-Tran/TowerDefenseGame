@@ -241,12 +241,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//BUYING TOWERS LOGIC
 		for(Tower tower: components.getTowers()) {
-			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.pelTowerCost && tank == 0) {
+			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.getPelletTowerCost() && tank == 0) {
 				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buyPelTower();
 				repaint();
 			}
-			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.squTowerCost && tank == 1) {
+			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.getSquirtTowerCost() && tank == 1) {
 				components.getTowers().add(new SquirtTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buySquTower();
 				repaint();

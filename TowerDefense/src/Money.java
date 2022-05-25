@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -7,23 +6,22 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 
 public class Money {
-int x = 925;
-int y = -45;
-int total; //initialize cost of money
-int max = 300;
-static int pelTowerCost = 30;
-static int squTowerCost = 40;
-private Image img; 	
-private AffineTransform tx;
+	private int x = 925;
+	private int y = -45;
+	private int total; //initialize cost of money
+	private int max = 300;
+	private static int pelTowerCost = 30;
+	private static int squTowerCost = 40;
+	private Image img; 	
+	private AffineTransform tx;
 
-public Money(int ncost) {
-	img = getImage("/imgs/wolverine bucks.png"); //load the image for money (wolverine buck)
-total = ncost;
+	public Money(int ncost) {
+		img = getImage("/imgs/wolverine bucks.png"); //load the image for money (wolverine buck)
+		total = ncost;
 
-
-tx = AffineTransform.getTranslateInstance(x, y );
-init(x, y); 
-}
+		tx = AffineTransform.getTranslateInstance(x, y );
+		init(x, y); 
+	}
 
 	
 
@@ -57,10 +55,8 @@ init(x, y);
 			e.printStackTrace();
 		}
 		return tempImage;
+	}
 	
-
-	
-}
 	//method to buy the Pellet Tower Variant as well as remove the specific cost from the total balance
 	public void buyPelTower() {
 		total -= pelTowerCost; //cost of tower is 50
@@ -79,5 +75,13 @@ init(x, y);
 	//Logic to help add money after a round ends
 	public void setMoney(int setMoney) {
 		total = setMoney;
+	}
+	
+	public static int getPelletTowerCost() {
+		return pelTowerCost;
+	}
+	
+	public static int getSquirtTowerCost() {
+		return squTowerCost;
 	}
 }

@@ -17,8 +17,7 @@ public class SlimeEnemy {
 	private int sy;//slime y movement
 	private boolean hasEscaped;
 	//for movement
-
-
+	
 	//add location attributes
 	protected Image img; 	
 	protected AffineTransform tx;
@@ -32,8 +31,7 @@ public class SlimeEnemy {
 		//initialize the location of the image
 		x = newX;
 		y = newY;
-		
-		
+			
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y);
 		//use your variables
@@ -43,11 +41,8 @@ public class SlimeEnemy {
 		initialHealth = 180;
 		sx = 0;
 		sy = 0;
-		hasEscaped = false;
-		
+		hasEscaped = false;	
 	}
-	
-	
 	
 	public void paint(Graphics g) {
 		//these are the 2 lines of code needed draw an image on the screen
@@ -67,8 +62,7 @@ public class SlimeEnemy {
 		tx.setToTranslation(x, y);
 		tx.scale(0.8,0.8);
 		x += sx;
-		y += sy;
-		
+		y += sy;	
 	}
 	
 	protected void init(double a, double b) {
@@ -115,19 +109,16 @@ public class SlimeEnemy {
 		sx = speedX;
 		sy = speedY;
 		
-	
 	}
 	
 	public void moveUp(int speedX, int speedY) {
 		sx = speedX;
 		sy = speedY;
-		
 	}
 	
 	public void moveDown(int speedX, int speedY) {
 		sx = speedX;
 		sy = speedY;
-		
 	}
 	
 	
