@@ -1,7 +1,7 @@
 # TowerDefenseGame
 
 This is TowerDefense game by: Robert Niciu, Colin Tran, and Sriman Rajamani. 
-![image](https://user-images.githubusercontent.com/90793421/169584701-1f840583-a68b-414a-a2f8-bb35e1157727.png)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/90793421/170340990-40fa5dfd-940b-4249-8154-42edef83ce82.gif)
 
 ## Premise
 
