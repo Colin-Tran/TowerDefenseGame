@@ -16,7 +16,6 @@ public abstract class Tower { //you can not instantiate Tower class
 	protected String towerType; //name of the tower type
 	
 	protected double cost; //how much it costs
-	protected int damage; //the damage it inflicts on enemy
 	protected double range; //number of tiles it can attack enemy
 	protected double speed; //interval between 2 consecutive attacks
 	
@@ -33,16 +32,15 @@ public abstract class Tower { //you can not instantiate Tower class
 	static protected int IMG_PIXELS = 25; //size of the tower pngs
 	private int cannonPositionsMax; //how many intermediate steps a cannon ball takes to hit
 	
-	protected boolean displayRange = true;
+	protected boolean displayRange = true; //if you want the tower to display the range
 	
-	public Tower(String towerType, double cost, int damage, 
+	public Tower(String towerType, double cost,
 			double range, double speed, 
 			int x, int y, int width, int height, 
 			String imageFile) {
 		
 		this.towerType = towerType;
 		this.cost = cost;
-		this.damage = damage;
 		this.range = range;
 		this.speed = speed;
 		this.x = x;
@@ -62,7 +60,8 @@ public abstract class Tower { //you can not instantiate Tower class
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawRect(x, y, width, height); //shows the borders of the tower
 		g2.drawImage(img, tx, null);
-		if(cannonPosition > 0) {
+		
+		if(cannonPosition > 0) { //used for drawing the cannon ball
 			g.setColor(Color.black);
 			Point enemyCenter = new Point(
 					enemy.getX()+width/2, enemy.getY() + height/2);
@@ -136,9 +135,9 @@ public abstract class Tower { //you can not instantiate Tower class
 	//rotates the cannon to the picked enemy
 	private void rotateCannon() {
 		if(enemy != null) {//if the enemy exists
-			Point towerCenter = getCenter();
+			Point towerCenter = getCenter(); //the point of the center of the tower
 			Point enemyCenter = new Point(
-					enemy.getX()+width/2, enemy.getY() + height/2);
+					enemy.getX()+width/2, enemy.getY() + height/2);//the point of the center of the enemy
 			int newRotation = (int) angle(towerCenter, enemyCenter);
 			if (rotation != newRotation) {//if the rotation is not the same as the new rotation
 				rotation = newRotation;
@@ -146,8 +145,6 @@ public abstract class Tower { //you can not instantiate Tower class
 				//System.out.println("rotation = " + rotation + 
 			     //		"; enemy Center = " + enemyCenter);
 			}
-			
-			
 		}
 	}
 	

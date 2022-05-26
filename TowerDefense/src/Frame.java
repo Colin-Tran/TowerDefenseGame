@@ -3,8 +3,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.MouseInfo;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,163 +10,116 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;  // Import the File class
-import java.io.FileWriter;
-import java.io.Writer;
-import java.io.IOException;  // Import the IOException class to handle errors
-import java.io.OutputStreamWriter;
-import java.io.PrintStream;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	private int levelCounter = 1;
-	static SlimeEnemy[] slimes = new SlimeEnemy[0]; 
-	Level lvl2 = new Level(2, 2);
 	
-	GameComponents components = new GameComponents();
-	Money wallet = new Money(60); //start out with 60 bucks
-	TowerDisplay display = new TowerDisplay(1025,100);
-	
+	//initialization of all object types
+	private static SlimeEnemy[] slimes = new SlimeEnemy[0];  //enemies
+	private GameComponents components = new GameComponents(); //background, enemies, towers
+	private Money wallet = new Money(60); //start out with 60 bucks
+	private TowerDisplay display = new TowerDisplay(1025,100); //info about cost of towers
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		
-		
-		
-	//	System.out.println(str);
-		
-		
-		//get the components, based on the current Game mode and level
+	
+		//paint background
 		Background bg = components.getBackground();
+		bg.paint(g);
 		
-		ArrayList<SlimeEnemy> enemies = new ArrayList<SlimeEnemy>();
+		//retrieve enemies to display
+		ArrayList<SlimeEnemy> enemies = new ArrayList<SlimeEnemy>();	
 		if (!Game.instance.isGameOver()) {
 			enemies = components.getEnemies(0, 330); //will spawn enemies
 		}
 		slimes = convertToArray(enemies);
-		bg.paint(g);
-		g.setColor(Color.orange);
-		//g.drawString("Lives =" + pl.getLives(), 50, 50);
+		
+		//set font for text shown on the board
 		Font myFont = new Font("Serif", Font.BOLD, 30);
 		g.setFont(myFont);
+		
+		//LOGIC FOR ESCAPING SLIMES AND REMOVING LIVES
 		for(int i = 0; i < slimes.length; i++) {
 			if(slimes[i].getX() >= 930) { //if out of screen, don't paint enemies
 				slimes[i].hasEscaped();
-				Game.instance.getPlayer().loseLife();
+				Game.instance.getPlayer().loseLife(); //if slime leaves border make player lose one life
 				
 			}else {
 				slimes[i].paint(g);
 			}
 		}
+		
+		//paint wallet image
 		wallet.paint(g);
 		
+		//displaying lives and the score
+		g.setColor(Color.orange);
 		g.drawString("Lives = " + Game.instance.getPlayer().getLives(), 50, 50);
 		g.drawString("Score (enemies killed) = " + Game.instance.getPlayer().getScore(), 250, 50);
-		//game over
-		if(Game.instance.getPlayer().getLives() < 0) {
+		
+		//handle end game
+		if(Game.instance.isGameOver()) {
 			for(int i = 0; i <slimes.length; i++) {
 				slimes[i].resetStop();
 			}
 			
-			//components.getTowers().clear();
-		}
-		
-	
-		
-		//end game
-		if(Game.instance.isGameOver()) {
 			Color c = new Color(255, 255, 255);
 			g.setColor(c);
 			Font s = new Font("Serif", Font.BOLD, 30);
 			g.setFont(s);
 			g.drawString("GAME OVER, YOU HAVE ZERO LIVES LEFT", 200, 250);
 			
-			
 			components.getTowers().clear();
 		}
 		
-		
-		//counters for money and levels
-		 
-		levelCounter = 	Game.instance.getLevel().getLevelCounter();
-		int moneyCounter = 0 ;
-
-		//next level	
-				boolean nxtLvlRdy = false;
-				if(Game.instance.getPlayer().getLives() > -1 && components.getEnemies(0, 330).size() == 0 ) {
-					nxtLvlRdy = true;
-				//	for(int i = 0; i < 5; i++) {
-					//int levelTime = i *1000;
-				//}
-				
-				//if(Game.instance.advanceLevel()) {
-
-					//Game.instance.setLevel(lvl2);
-					//Game.instance.advanceLevel();
-					//Game.instance.getLevel().startEnemySpawning();
-					//Game.instance.getLevel().spawnEnemy(0, 330, null);
-					
-			
-					if(nxtLvlRdy) {
-					/*for(int i = 0; i < 5; i++) {
-					Game.instance.setLevel(new Level(1, i));
-				}*/	
-			
-					
-					System.out.println(nxtLvlRdy);
-			//	}	
-					}
-					moneyCounter += 30;
-					moneyCounter += wallet.getTotal();
-				
-				}
-
-		/*		//need to fix level counter ++
-				if(components.getEnemies(0, 0).size() == 0) {
-				levelCounter++;
-				nxtLvlRdy = false;
-				}*/
-			if(nxtLvlRdy) {
-				wallet.setMoney(moneyCounter);
-				nxtLvlRdy = false;
-			}
-					
-		int counter = 0;
+		//next level logic
+		int counter = 0; //counts how many enemies are still alive
 		for(int i = 0; i < slimes.length; i++) {
 			if(slimes[i].isAlive() == false) {
 				counter++;
 			}
 		}
-				
-		//move onto next level if all slimes are dead
 		if(counter >= slimes.length && !Game.instance.isGameOver()) {
-			Game.instance.advanceLevel();
-			
+			Game.instance.advanceLevel(); //move onto next level if all slimes are dead
+			int moneyCounter = 0 ;
+			moneyCounter += 30;
+			moneyCounter += wallet.getTotal();
+			wallet.setMoney(moneyCounter);
 		}
 	
+		//displaying level, enemies to kill for the current level, and current money
 		levelCounter = Game.instance.getLevel().getLevelCounter();
 		g.drawString("LEVEL: " + levelCounter, 0, 450);
 		g.drawString("(enemies to kill: " + 
 				Game.instance.getLevel().getMaxNumEnemies() + ")", 144, 450);
-		
-	
 		g.drawString("Money: " + wallet.getTotal(), 1100, 450);
 
+		//set text to orange
 		Color color = new Color(255, 153, 51); //Sets text to orange, also used to see hit boxes. Is movable to different parts of code to hide/show hit boxes.
 		g.setColor(color);
 		Font stringFont = new Font( "SansSerif", Font.BOLD, 40 );
 		g.setFont(stringFont);
 		
+		moveSlimeEnemies();
 		
-		//movement
+		//tower methods to fire at enemies and paint
+		for (Tower tower: components.getTowers()) {
+			tower.fireEnemies(enemies);
+			tower.paint(g);
+		}
+		
+		display.paint(g);
+	}
+		
+	private void moveSlimeEnemies() {
+		//movement pathway for all slime enemies
 		for(int i = 0; i < slimes.length; i++) { 
 				
 			int j = 1;
-			j += levelCounter;
+			j += levelCounter; //Change the speed at which they are moving left/right/up/down dependent on level.
 		
 			if(slimes[i].getX() <= 100 && slimes[i].getY() < 500) { //move right at beginning
 				slimes[i].moveRight(j, 0);
@@ -215,27 +166,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			if(slimes[i].getX() < 900 && slimes[i].getX() > 805 && slimes[i].getY() < 350 && slimes[i].getY() > 240) {
 				slimes[i].moveRight(j, 0);
 			}
-			
-			
-			
-			//RESET 
-			
-			//if( slimes[i].getX()> 1000 && slimes[i].getY() <350 ) {
-				//slimes[i].reset();
-			//}
-			
 		} //close for loop
 		
-		for (Tower tower: components.getTowers()) {
-			tower.fireEnemies(enemies);
-			tower.paint(g);
-		}
-		
-		
-		
-		display.paint(g);
 	}
-		
+	
+	//converting slime enemy array list into a array for ease of access
 	private static SlimeEnemy[] convertToArray(ArrayList<SlimeEnemy> enemies) {
 		SlimeEnemy[] array = new SlimeEnemy[enemies.size()];
 		for(int i = 0; i < enemies.size(); i++) {
@@ -247,8 +182,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public static void main(String[] arg) {
 		Frame f = new Frame();
-
-		
     }
 		 
 	
@@ -270,8 +203,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 	
 	}
+	
+	
+	
 	private void initializeGame() {
-		//Game.instance.getLevel().startEnemySpawning(); //level
+		//Starting up the game by initializing the defaults for everything needed. 
+		//Initialized one of each tower type as well as their ranges and displayed it.
+		
 		Tower tower1 = new PelletTower(210, 300, 75, 75);
 		Tower tower2 = new SquirtTower(710, 220, 75, 75);
 				tower1.setDisplayRange(true);
@@ -280,14 +218,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		components.addTower(tower2);
 	}
 	
-	int tank = 0;
+	//for key presses later on, helps us differentiate between buying pellet or squirt towers (the 2 different tower types).
+	static int tank = 0;
 
-	
 	@Override
-	
 	public void mouseClicked(MouseEvent arg0) {
-	
-		
+
 	}
 
 	@Override
@@ -302,21 +238,20 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
+		
+		//BUYING TOWERS LOGIC
 		for(Tower tower: components.getTowers()) {
-			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.pelTowerCost && tank == 0) {
+			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.getPelletTowerCost() && tank == 0) {
 				components.getTowers().add(new PelletTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buyPelTower();
 				repaint();
 			}
-			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.squTowerCost && tank == 1) {
+			if(arg0.getX() < 1000 && arg0.getY() < 1000 && wallet.getTotal() >= Money.getSquirtTowerCost() && tank == 1) {
 				components.getTowers().add(new SquirtTower(arg0.getX()-25, arg0.getY()-50, 75, 75));
 				wallet.buySquTower();
 				repaint();
 			}
-			
-	
 		}
-		
 	}
 
 	@Override
@@ -334,53 +269,35 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+		
+		//DELETING TOWERS LOGIC
 		if(arg0.getKeyCode() == 8) {
 			for(Tower tower: components.getTowers()) {
 				for(int i = 0; i < components.getTowers().size()-1 ; i++) { //always leaves 1 tower so can place more
-				//components.getTowers().get(i).setLocation(-1000, -1000);
-				components.getTowers().remove(i);
-
+					//components.getTowers().get(i).setLocation(-1000, -1000);
+					components.getTowers().remove(i);
 				}
 			}
-			
 		}
 		
+		//USED CASE SWITCH FOR KEY PRESS CODE. THIS HELPS US DECIDE WHAT TOWER WE ARE BUYING
 		switch(arg0.getKeyCode()) {
 		case 49:
-			
 			tank = 0;
-			
 			break;
 		case 50:
-			
 			tank = 1; 
-			
 			break;
-			
 		default:
-		
 			tank = 0;
-			
 		}
-		/*if(arg0.getKeyCode() == 49) {
-			tank = 0;
-		}else if(arg0.getKeyCode() == 50) {
-			tank = 1;
-		}
-		/*
-		NEED TO FIND OUT HOW TO REMOVE PLACED TOWERS
-		*/
 		System.out.println(arg0.getKeyCode());	
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
-		
+	
 	}
 
 	@Override
@@ -388,6 +305,5 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 
 	}
-
 }
 
